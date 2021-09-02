@@ -19,7 +19,7 @@ export default function AdminPanel() {
         body.append("thumbnail", thumbnail)
         body.append("dir", dir)
 
-        const res = await fetch("/api/feed",{
+        const res = await fetch(`${env("API_URL")}/api/feed`,{
             method: 'POST',
             body
         })

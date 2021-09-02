@@ -11,7 +11,7 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
   
   const addToWatchList = async (e) => {
 
-    const addedtowatchlist = await fetch("/api/movie/wannawatch", {
+    const addedtowatchlist = await fetch(`${env("API_URL")}/api/movie/wannawatch`, {
         method: 'POST',
         body: JSON.stringify({email: email, movie: url})
     })
@@ -20,7 +20,7 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
     }
   }
   const removeWatchList = async (e) => {
-    const removed = await fetch("/api/movie/removewatchlist", {
+    const removed = await fetch(`${env("API_URL")}/api/movie/removewatchlist`, {
       method: 'POST',
       body: JSON.stringify({email: email, movie: url})
     })

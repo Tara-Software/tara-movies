@@ -20,7 +20,7 @@ export default function ControlPanel({user, params}) {
         body.append("file", avatar);
         
         try {
-            const response = await fetch("/api/auth/update", {
+            const response = await fetch(`${env("API_URL")}/api/auth/update`, {
                 method: 'POST',
                 body
             });
