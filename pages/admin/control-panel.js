@@ -19,7 +19,7 @@ export default function AdminPanel() {
         body.append("thumbnail", thumbnail)
         body.append("dir", dir)
 
-        const res = await fetch(`${process.env.API_URL}/api/feed`,{
+        const res = await fetch(`https://tara-movies.vercel.app/api/feed`,{
             method: 'POST',
             body
         })

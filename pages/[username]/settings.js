@@ -20,7 +20,7 @@ export default function ControlPanel({user, params}) {
         body.append("file", avatar);
         
         try {
-            const response = await fetch(`${process.env.API_URL}/api/auth/update`, {
+            const response = await fetch(`https://tara-movies.vercel.app/api/auth/update`, {
                 method: 'POST',
                 body
             });

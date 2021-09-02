@@ -3,7 +3,7 @@ import path from 'path'
 
 export default function handle(req, res) {
     const database_path = "/home/daiant/Documentos/VIDEO_DATABASE/"
-    const movieId = req.url.split(`${process.env.API_URL}/api/movie/`)[1]
+    const movieId = req.url.split(`https://tara-movies.vercel.app/api/movie/`)[1]
     const path = database_path + movieId + ".mp4"
     
     const stat = fs.statSync(path)

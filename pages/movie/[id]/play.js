@@ -188,7 +188,7 @@ export default function Movie({ user, movie, data}) {
                                 onDuration={handleDuration} 
                                 className="video-player" 
                                 onProgress={handleProgress} 
-                                url={`${process.env.API_URL}/api/movie/${movie}`} 
+                                url={`https://tara-movies.vercel.app/api/movie/${movie}`} 
                                 playing={playing} 
                                 muted={mute} 
                                 volume={Number(volume)}

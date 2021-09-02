@@ -27,7 +27,7 @@ export default function Signup() {
 
             // Creamos una nueva sesión para el usuario maldito
             
-            const session_response = await fetch(`${process.env.API_URL}/api/auth/login`, {
+            const session_response = await fetch(`https://tara-movies.vercel.app/api/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify({email:res.email, password:res.password})
             })
