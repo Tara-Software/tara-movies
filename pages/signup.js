@@ -18,7 +18,7 @@ export default function Signup() {
         e.preventDefault()
         
         const hashed_password = hash_password(password);
-
+        console.log(process.env.API_URL + "/api/auth/signup")
         const response = await fetch(`${process.env.API_URL}/api/auth/signup`, {
             method: 'POST',
             body: JSON.stringify({name: username, email: email, password: hashed_password})
