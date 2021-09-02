@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Session {
+  id            String    @id @default(cuid())
+  userId        String
+  expires       DateTime
+  has_expired   String    
+  sessionToken  String    @unique
+  accessToken   String    @unique
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  user          User      @relation(fields: [userId], references:[id])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String    @unique
+  email         String    @unique
+  password      String 
+  avatar        String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  watchlists     Watchlist[]
+}
+
+model Movie {
+  id            String          @id @default(cuid())
+  title         String          @unique
+  thumbnail     String?
+  description   String?
+  directorId    String? 
+  location      String
+  createdAt     DateTime        @default(now())
+  director      Director?       @relation(fields: [directorId], references:[id])
+  genres        GenreOnMovie[]
+  watchlists    Watchlist[]
+}
+
+model Director {
+  id            String  @id @default(cuid())
+  name          String 
+  movies        Movie[]
+  description   String?
+}
+
+model Genre {
+  id            String          @id @default(cuid())
+  name          String
+  movies        GenreOnMovie[]
+}
+
+model GenreOnMovie {
+  movieId       String
+  movie         Movie   @relation(fields: [movieId], references: [id])
+  genreId       String
+  genre         Genre   @relation(fields: [genreId], references: [id])
+
+  @@id([movieId, genreId])
+}
+
+model Watchlist {
+  movieId       String
+  movie         Movie   @relation(fields: [movieId], references: [id])
+  userId        String
+  user          User    @relation(fields: [userId],  references: [id])
+
+  @@id([movieId, userId])
+}

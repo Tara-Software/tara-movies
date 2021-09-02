@@ -1,0 +1,37 @@
+{
+  "name": "tara-movies",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@auth0/nextjs-auth0": "^1.5.0",
+    "@next-auth/prisma-adapter": "^0.5.3",
+    "@prisma/client": "^2.29.1",
+    "cookies": "^0.8.0",
+    "crypto-js": "^4.1.1",
+    "formidable": "^1.2.2",
+    "http-proxy": "^1.18.1",
+    "mime": "^2.5.2",
+    "next": "^11.1.0",
+    "next-auth": "^3.27.3",
+    "nextjs-progressbar": "^0.0.11",
+    "node-rsa": "^1.1.1",
+    "nookies": "^2.5.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-full-screen": "^1.1.0",
+    "react-player": "^2.9.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.0.1",
+    "prisma": "^2.29.1"
+  }
+}
