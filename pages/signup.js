@@ -19,7 +19,7 @@ export default function Signup() {
         
         const hashed_password = hash_password(password);
 
-        const response = await fetch('http://localhost:3000/api/auth/signup', {
+        const response = await fetch('/api/auth/signup', {
             method: 'POST',
             body: JSON.stringify({name: username, email: email, password: hashed_password})
         });
@@ -28,7 +28,7 @@ export default function Signup() {
 
             // Creamos una nueva sesión para el usuario maldito
             
-            const session_response = await fetch('http://localhost:3000/api/auth/login', {
+            const session_response = await fetch('/api/auth/login', {
                 method: 'POST',
                 body: JSON.stringify({email:res.email, password:res.password})
             })

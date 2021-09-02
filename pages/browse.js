@@ -4,7 +4,7 @@ import Navigation from '../components/Navigation'
 import MovieBlock from '../components/MovieBlock'
 
 export async function getServerSideProps(ctx) {
-  const res = await fetch('http://localhost:3000/api/movies')
+  const res = await fetch('/api/movies')
   const movies = await res.json()
 
   const isAuthenticated = await getUserAuth(ctx)

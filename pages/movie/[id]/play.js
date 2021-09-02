@@ -188,7 +188,7 @@ export default function Movie({ user, movie, data}) {
                                 onDuration={handleDuration} 
                                 className="video-player" 
                                 onProgress={handleProgress} 
-                                url={`http://localhost:3000/api/movie/${movie}`} 
+                                url={`/api/movie/${movie}`} 
                                 playing={playing} 
                                 muted={mute} 
                                 volume={Number(volume)}
