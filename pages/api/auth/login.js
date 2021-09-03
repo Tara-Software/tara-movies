@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client'
 import { SHA256 } from 'crypto-js'
 import nookies from 'nookies'
+import prisma from '../../../lib/prisma';
 
-const prisma = new PrismaClient()
+// const prisma = new PrismaClient()
 
 export default async function handle(req, res) {
 

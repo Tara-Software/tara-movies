@@ -1,11 +1,8 @@
-//TODO: por ahora el video funciona porque lo encuentra en la base de datos no porque haya una subida ni nada. 
-
-
-import { PrismaClient } from "@prisma/client";
 import fs from 'fs'
 import formidable from "formidable";
+import prisma from '../../../lib/prisma';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient()
 
 export const config = {
     api: {
