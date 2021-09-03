@@ -11,7 +11,7 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
   
   const addToWatchList = async (e) => {
 
-    const addedtowatchlist = await fetch(`https://tara-movies.vercel.app/api/movie/wannawatch`, {
+    const addedtowatchlist = await fetch(`http://localhost:3000/api/movie/wannawatch`, {
         method: 'POST',
         body: JSON.stringify({email: email, movie: url})
     })
@@ -20,7 +20,7 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
     }
   }
   const removeWatchList = async (e) => {
-    const removed = await fetch(`https://tara-movies.vercel.app/api/movie/removewatchlist`, {
+    const removed = await fetch(`http://localhost:3000/api/movie/removewatchlist`, {
       method: 'POST',
       body: JSON.stringify({email: email, movie: url})
     })

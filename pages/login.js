@@ -31,7 +31,7 @@ export default function Login({username}) {
         
 
         try {
-            const response = await fetch(`https://tara-movies.vercel.app/api/auth/login`, {
+            const response = await fetch(`http://localhost:3000/api/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify(payload)
             })
