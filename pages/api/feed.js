@@ -10,7 +10,6 @@ export const config = {
     }
 }
 export default async function handle(req, res) {
-    const directory = "/videos/"
 
     const form = formidable.IncomingForm();
     form.parse(req, async function(err, fields, files) {
@@ -31,7 +30,7 @@ export default async function handle(req, res) {
             await saveFile(files.thumbnail, thumbnail);
             return res.status(200).json()
         }
-        return res.status(500)
+        return res.status(500).json()
     })
 }
 
