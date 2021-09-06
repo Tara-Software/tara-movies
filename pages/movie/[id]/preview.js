@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 export default function Movie({ user, movie, data}) {
     const [inWatchlist, setInWatchlist] = useState(false)
-    console.log(data)
 
     useEffect(() => {
         const moviesInWatchlist = user.watchlists.map((object) => object.movie.id)

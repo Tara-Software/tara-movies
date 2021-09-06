@@ -18,7 +18,6 @@ export default async function handle(req, res) {
         var form = new multiparty.Form()
 
         form.on('part', function(formPart) {
-            console.log(formPart.filename)
             var contentType = formPart.headers['content-type'];
 
             var formData = {

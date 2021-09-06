@@ -8,6 +8,7 @@ export default function Navigation(props) {
     const settings_URL = (props.username ? "/" + props.username + "/settings" : "#")
     const index_URL = (props.username ? "/browse" : "/")
     const watchlist_URL = (props.username ? "/" + props.username + "/watchlist" : "#")
+    const image = (props.avatar ? props.avatar : "/images/avatar.default.png")
 
     useEffect(() => {
         // Close the dropdown menu if the user clicks outside of it
@@ -43,7 +44,7 @@ export default function Navigation(props) {
                     <>
                     <div className={styles.dropdown}  onClick={toggleShowDropDown}>
                         <div className={styles.dd_cover}>
-                            <Image src={props.avatar} width="32px" height="32px" className="dd_image"/>
+                            <Image src={image} width="32px" height="32px" className="dd_image"/>
                             <span className={styles.dd_cover_name}>{props.username || ""}</span>
                             </div>
                         <div className={styles.dd_content} id="dd">

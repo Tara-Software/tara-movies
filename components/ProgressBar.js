@@ -64,7 +64,7 @@ export default function ProgressBar(props) {
         res += parseInt(time % 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
         // minutos
         res = ":" + res
-        res = parseInt(time / 60).toLocaleString("es-ES", {minimumIntegerDigits:2}) + res
+        res = parseInt(time % 3600 / 60).toLocaleString("es-ES", {minimumIntegerDigits:2}) + res
         if(parseInt(time/3600) > 0 ) {
             res = parseInt(time/3600) + ":" + res
     }

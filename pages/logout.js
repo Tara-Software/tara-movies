@@ -15,7 +15,6 @@ export async function getServerSideProps(ctx) {
             method: 'POST',
             body: JSON.stringify(cookie.accessToken)
             })
-            console.log(destroyed)
         } catch(e) {
             console.log(e)
         } finally {

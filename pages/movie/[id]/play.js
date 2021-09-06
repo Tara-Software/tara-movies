@@ -55,7 +55,7 @@ export default function Movie({ user, movie, data}) {
         res += parseInt(time % 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
         // minutos
         res = ":" + res
-        res = parseInt(time / 60).toLocaleString("es-ES", {minimumIntegerDigits:2}) + res
+        res = parseInt(time % 3600 / 60).toLocaleString("es-ES", {minimumIntegerDigits:2}) + res
         if(parseInt(time/3600) > 0 ) {
             res = parseInt(time/3600) + ":" + res
         }
@@ -65,7 +65,8 @@ export default function Movie({ user, movie, data}) {
     const durationToSeconds = (duration) => {
         var res = ""
         const seconds = parseInt(duration % 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
-        const minutes = parseInt(duration / 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
+        const minutes = parseInt(duration % 3600 / 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
+        // const minutes = parseInt(duration % 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
         if(parseInt(duration/3600) > 0 ) {
             res = parseInt(duration/3600) + ":" + res
         }

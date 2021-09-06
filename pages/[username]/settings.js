@@ -26,7 +26,6 @@ export default function ControlPanel({user, params}) {
             });
             if(response.ok) {
                 const data = await response.json()
-                console.log("todo bien")
 
                 router.push("/"+data.username+"/settings")
                 // Poner que todo es correcto

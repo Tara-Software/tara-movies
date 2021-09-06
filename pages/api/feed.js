@@ -1,6 +1,6 @@
 import fs from 'fs'
 import formidable from "formidable";
-import prisma from '../../../lib/prisma';
+import prisma from '../../lib/prisma';
 
 // const prisma = new PrismaClient()
 
@@ -12,26 +12,39 @@ export const config = {
 export default async function handle(req, res) {
 
     const form = formidable.IncomingForm();
-    form.parse(req, async function(err, fields, files) {
+    
+    var movie = await new Promise(function(resolve, reject) {
+        form.parse(req, async function(err, fields, files) {
         let thumbnail = "default.png"
-        if(files.thumbnail !== undefined) {
-            thumbnail = files.thumbnail.name
-        }
-        const movie = await prisma.movie.create({
-            data: {
-                title: fields.title,
-                description: fields.description,
-                location: fields.dir,
-                thumbnail: '/images/' + thumbnail, 
-
+  
+        try {
+            const prisma_response = await prisma.movie.create({
+                data: {
+                    title: fields.title,
+                    description: fields.description,
+                    location: "en el otro server",
+                }
+            }); // movie
+            if(files.thumbnail !== undefined) {
+                thumbnail = prisma_response.id + files.thumbnail.name.split(".")[1]
             }
-        })
-        if(movie) {
-            await saveFile(files.thumbnail, thumbnail);
-            return res.status(200).json()
+            const add_thumb = await prisma.movie.update({
+                where: {
+                    id: prisma_response.id
+                },
+                data: {
+                    thumbnail: "/images/" + thumbnail
+                }
+            })
+            await saveFile(files.thumbnail, thumbnail)
+            resolve(prisma_response)
+        } catch(error) {
+            reject(error)
         }
-        return res.status(500).json()
-    })
+        
+        }); // parse
+    }); // promise
+    return res.json({id: movie.id})
 }
 
 const saveFile = async (file, id) => {

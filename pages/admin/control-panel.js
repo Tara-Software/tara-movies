@@ -1,5 +1,6 @@
 import Head from "next/head"
 import Link from "next/link"
+import Navigation from "../../components/Navigation"
 
 export default function AdminPanel() {
 
@@ -8,6 +9,7 @@ export default function AdminPanel() {
         <Head>
             <title>Control Panel</title>
         </Head>
+        <Navigation username="Admin"/>
         <main className="padding">
            <h1>Bienvenido, administrador.</h1>
            <fielset>
