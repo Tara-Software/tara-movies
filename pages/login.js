@@ -27,8 +27,7 @@ export default function Login({username}) {
     const handleLogin = async (e) => {
         e.preventDefault()
         const hashed_password = encrypt_password(password)
-        let payload = {email: email, password: hashed_password}
-        
+        let payload = {email: email, password: hashed_password}      
 
         try {
             const response = await fetch(`http://localhost:3000/api/auth/login`, {
@@ -37,6 +36,7 @@ export default function Login({username}) {
             })
 
             if(response.ok) {
+                
             }
             
             router.push("/browse")
@@ -55,7 +55,7 @@ export default function Login({username}) {
                         <div className="input-wrapper">
                             <div className="input-wrapper-relative">
                                 <label className="input_email">
-                                    <input type="text" id="email" onBlur={outFocus} onFocus={focusInput} onChange={(e) => (setEmail(e.target.value))} required={true}/>
+                                    <input className="tara-input" type="text" id="email" onBlur={outFocus} onFocus={focusInput} onChange={(e) => (setEmail(e.target.value))} required={true}/>
                                     <label className="place-label" id="email-label" htmlFor="email">Correo electrónico</label>
                                 </label>
                             </div>
@@ -63,12 +63,12 @@ export default function Login({username}) {
                         <div className="input-wrapper">
                             <div className="input-wrapper-relative">
                                 <label className="input_password">
-                                    <input type="password" id="password" onFocus={focusInput} onBlur={outFocus} onChange={(e) => (setPassword(e.target.value))} required={true}/>
+                                    <input className="tara-input" type="password" id="password" onFocus={focusInput} onBlur={outFocus} onChange={(e) => (setPassword(e.target.value))} required={true}/>
                                     <label className="place-label" id="password-label" htmlFor="password">Contraseña</label>
                                 </label>
                             </div>
                         </div>
-                        <button className="submit-form" >Iniciar sesión</button>
+                        <button className="submit-form tara-button">Iniciar sesión</button>
                     </form>
                 </div>
             </div>

@@ -40,20 +40,25 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
             <div className="movie-item-movie-controls">
               <div className="movie-item-play-button">
                 <Link href={url_movie}>
-                  <a><img className="movie-item-play-button-img" src="/images/icons/play.svg"></img>Reproducir</a>
+                  <a>
+                    <div className="movie-item-play-button-img">
+                      <img className="play-normal" src="/images/icons/play-circle-outline-white.svg"></img>
+                      <img className="play-hover" src="/images/icons/play-circle-outline-hover.svg"></img>
+                    </div>
+                    <span className="movie-item-play-button-text">Reproducir</span></a>
                 </Link>
               </div>
               <div className="movie-item-add-watchlist">
                 {!inWatchlist &&
                 <>
-                  <img src={"/images/icons/add-outline.svg"} onClick={addToWatchList} />
-                  <div className="movie-item-add-watchlist-hover">Add to watchlist</div>  
+                  <img src={"/images/icons/add-outline-white.svg"} onClick={addToWatchList} />
+                  <div className="movie-item-add-watchlist-hover"><b>Añadir a la lista</b></div>  
                 </>
                 }
                 {inWatchlist && 
                   <>
-                  <img src={"/images/icons/close-outline.svg"} onClick={removeWatchList} />
-                  <div className="movie-item-add-watchlist-hover">Remove from watchlist</div>  
+                  <img src={"/images/icons/close-outline-white.svg"} onClick={removeWatchList} />
+                  <div className="movie-item-add-watchlist-hover"><b>Quitar de la lista</b></div>  
                   </>
                 }
               </div>

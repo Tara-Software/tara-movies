@@ -54,14 +54,20 @@ model Movie {
 
 model Director {
   id            String  @id @default(cuid())
-  name          String 
+  name          String  @unique
   movies        Movie[]
-  description   String?
 }
+
+// Algún día
+//model Casting {
+//  id            String  @id @default(cuid())
+//  name          String  @unique
+//  movies        Movie[]
+//}
 
 model Genre {
   id            String          @id @default(cuid())
-  name          String
+  name          String          @unique
   movies        GenreOnMovie[]
 }
 

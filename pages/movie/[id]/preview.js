@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 export default function Movie({ user, movie, data}) {
     const [inWatchlist, setInWatchlist] = useState(false)
-
     useEffect(() => {
         const moviesInWatchlist = user.watchlists.map((object) => object.movie.id)
         setInWatchlist(moviesInWatchlist.includes(movie))
@@ -31,6 +30,26 @@ export default function Movie({ user, movie, data}) {
         setInWatchlist(false)
         }
     }
+    const parseGenre = () => {
+        // TODO: Link a cada uno de esos géneros
+        const size = data.genres.length
+        var i = 1;
+        return data.genres.map((genre) => {
+            let res = " "
+            res += genre.name.charAt(0).toUpperCase() + genre.name.substring(1)
+            
+            if (i < size) {
+                res += ","
+                i++
+            }
+            return <Link key={genre.id} href={{ pathname: '/browse', query: {genreId: genre.id}}}><a><span className="link-to-browse">{res}</span></a></Link>
+        })
+    }
+    const parseDirector = () => {
+        // TODO: Link al director
+        
+        return data.director ? <Link href={{ pathname: '/browse', query: {directorId: data.director.id}}}><a><span className="link-to-browse">{data.director.name}</span></a></Link> : ""
+    }
     return (
         <>
         <Head>
@@ -38,48 +57,53 @@ export default function Movie({ user, movie, data}) {
             <meta type="description" content="Página de previsualización"></meta>
         </Head>
         <Navigation username={user.name} avatar={user.avatar} />
-        <main className="padding-10 main" style={{width: '100%'}}>
-                <div className="preview-wrapper">
+        <main className="main preview-main" style={{width: '100%'}}>
+                <div className="preview-image-wrapper">
+                    <div className="preview-image"><img src={data.thumbnail}/></div>
+                </div>
+                <div className="preview-wrapper padding">
                     <h1 id="movie-title">{data.title}</h1>
-                    <div className="movie-resumen">
+                    {/* <div className="movie-resumen">
                         <span>IMDB 6,6 2 h 9 min 2020 X-Ray HDR UHD 13</span>
-                    </div>
-                    <p className="data-description">{data.description || "Erase una vez en un reino muy muy lejano..."}</p>
-                    <div className="movie-data-list">
-                        <span className="movie-data-list-item">Dirección</span>
-                        <span className="movie-data-list-item">Reparto</span>
-                        <span className="movie-data-list-item">Géneros</span>
-                        <span className="movie-data-list-item">Subtítulos</span>
-                        <span className="movie-data-list-item">Idiomas de audios</span>
-                    </div>
+                    </div> */}
                     <div className="movie-actions-wrapper">
                         <Link href={`/movie/${data.id}/play`} >
-                            <div className="reproducir-wrapper">
-                                <img className="reproducir-img" width="45" height="auto" src="/images/icons/play.svg" />
-                                <span className="reproducir-text">Reproducir</span>
+                            <div className="reproducir-wrapper tara-button">
+                                <div className="reproducir-content">
+                                <div className="reproducir-img"><img width="60" height="auto" src="/images/icons/play-circle-fill.svg" /></div>
+                                <span className="reproducir-text">Reproducir película</span>
+                                </div>
                             </div>
                         </Link>
                         {inWatchlist && 
                         <>
+                        <div className="watchlist-wrapper">
                             <div onClick={removeWatchList} className="watchlist-button">
-                                <img width="40" height="40" src="/images/icons/close-outline.svg"></img>
-                                <div className="watchlist-button-hover">Remove from watchlist</div>  
-
+                                <img width="50" height="50" src="/images/icons/close-outline-white.svg"></img>
                             </div>
+                            <span className="watchlist-span">Quitar de la lista</span>  
+                        </div>
                         </>
                         }
                         {!inWatchlist && 
                         <>
+                        <div className="watchlist-wrapper">
                             <div onClick={addToWatchList} className="watchlist-button">
-                                <img width="40" height="40" src="/images/icons/add-outline.svg"></img>
-                                <div className="watchlist-button-hover">Add to watchlist</div>  
-
+                                <img width="50" height="50" src="/images/icons/add-outline-white.svg"></img>
                             </div>
+                            <span className="watchlist-span">Añadir a la lista</span>  
+                        </div>
                         </>
                         }
                     </div>
-                    <div className="preview-image-wrapper">
-                        <div className="preview-image"><img src={data.thumbnail}/></div>
+                
+                    <p className="data-description">{data.description || "Erase una vez en un reino muy muy lejano..."}</p>
+                    <div className="movie-data-list">
+                        <span className="movie-data-list-item">Dirección: <span className="movie-data-list-value">{parseDirector()}</span></span>
+                        <span className="movie-data-list-item">Reparto</span>
+                        <span className="movie-data-list-item">Géneros: <span className="movie-data-list-value">{parseGenre()}</span></span>
+                        <span className="movie-data-list-item">Subtítulos</span>
+                        <span className="movie-data-list-item">Idiomas de audios</span>
                     </div>
                 </div>
         </main>
@@ -97,7 +121,6 @@ export async function getServerSideProps(ctx) {
         }
     } else {
         const data = await getMovieData(ctx.params.id);
-        
         return {props: {user: isAuthenticated.user, movie: ctx.params.id, data: data}}
     }
 }

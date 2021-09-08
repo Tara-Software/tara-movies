@@ -1,13 +1,42 @@
 .web_nav {
     height: 64px;
     padding: 0 5%;
-    border-bottom: 1px solid rgb(221, 221, 221);
     position: relative;
     z-index: 999;
+}
+.web_nav::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: black;
+    opacity: 0.4;
+}
+.index_url {
+    cursor: pointer;
+}
+.image_icon {
+    width: 32px;
+    height: 64px;
+    display: inline-block;
+}
+.tara_icon {
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+.image_text {
+    vertical-align: middle;
+    margin-left: 10px;
+    color: white
 }
 .left {
     display: inline-block;
     height: 100%;
+    z-index: 999;
+    position: relative;
 }
 .vertical_center {
     margin: 0;
@@ -20,9 +49,16 @@
     /* display: inline-block; */
     float: right;
     height: 100%;
+    position: relative;
+    z-index: 999;
 }
 .item_right {
     margin-right: 20px;
+    color:white;
+    cursor: pointer;
+    border: 1px solid #00C9DE;
+    padding: 5px 15px;
+    border-radius: 5px;
 }
 .middle {
     line-height: 64px;

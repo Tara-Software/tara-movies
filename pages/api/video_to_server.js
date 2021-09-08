@@ -31,19 +31,22 @@ export default async function handle(req, res) {
                 }
             };
             request.post({
-                url: "http://localhost:3002/upload",
+                url: "http://localhost:3001/upload",
                 formData: formData,
             });
         });
 
         form.on('error', function(err) {
             console.log(error)
+            res.status(500).send(error)
         });
         form.on('close', function() {
-            res.send("received upload")
+            res.status(200).send("received upload")
         });
 
         form.parse(req)
+    } else {
+        res.status(404).send("")
     }
 } 
 

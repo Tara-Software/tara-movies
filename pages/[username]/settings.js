@@ -71,7 +71,7 @@ export default function ControlPanel({user, params}) {
                         <div className="input-wrapper">
                             <div className="input-wrapper-relative">
                                 <label className="input_username">
-                                <input type="text" id="username" maxLength="15" value={username} pattern="^\S+$" title="Solo se permiten 15 letras sin espacios" onBlur={outFocus} onFocus={focusInput} onChange={(e) => setUsername(e.target.value)} required/>
+                                <input className="tara-input" type="text" id="username" maxLength="15" value={username} pattern="^\S+$" title="Solo se permiten 15 letras sin espacios" onBlur={outFocus} onFocus={focusInput} onChange={(e) => setUsername(e.target.value)} required/>
                                     <label className={username ? "place-label set" : "place-label"} id="username-label" htmlFor="username">Nombre de usuario</label>
                                 </label>
                             </div>
@@ -79,7 +79,7 @@ export default function ControlPanel({user, params}) {
                         <div className="input-wrapper">
                             <div className="input-wrapper-relative">
                                 <label className="input_email">
-                                    <input type="email" id="email" value={user.email} onFocus={focusInput} onBlur={outFocus} disabled={true}/>
+                                    <input className="tara-input" type="email" id="email" value={user.email} onFocus={focusInput} onBlur={outFocus} disabled={true}/>
                                     
                                     <label className="place-label set" id="email-label" htmlFor="email">Correo electrónico</label>
                                 </label>
@@ -88,12 +88,12 @@ export default function ControlPanel({user, params}) {
                         <div className="input-wrapper">
                             <div className="input-wrapper-relative">
                                 <label className="input_avatar">
-                                    <input type="file" id="avatar" onFocus={focusInput} onBlur={outFocus} onChange={uploadToClient}/>
+                                    <input className="tara-input" type="file" id="avatar" onFocus={focusInput} onBlur={outFocus} onChange={uploadToClient}/>
                                     <label className="place-label set" id="avatar-label" htmlFor="avatar">Avatar</label>
                                 </label>
                             </div>
                         </div>
-                        <button className="submit-form">Guardar cambios</button>
+                        <button className="submit-form tara-button">Guardar cambios</button>
                     </form>
                 </div>
             </div>

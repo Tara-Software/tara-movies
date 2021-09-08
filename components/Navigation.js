@@ -31,13 +31,21 @@ export default function Navigation(props) {
     return (
         <nav className={styles.web_nav}>
             <div className={styles.left}>
-                <span className={styles.middle}><Link href={index_URL}>TaraMovies</Link></span>
+                <div className={styles.middle}>
+                    <Link href={index_URL}>
+                        <div className={styles.index_url}>
+                            <div className={styles.image_icon}>
+                                <img className={styles.tara_icon} src="/tara-software.svg" />
+                            </div>
+                            <span className={styles.image_text}>Tara Movies</span>
+                        </div>
+                    </Link>
                 </div>
+            </div>
             <div className={styles.right}>
                 {!props.username &&
                     <>
-                    <span className={styles.item_right+ " " + styles.middle}><Link href="/login">Login</Link></span>
-                    <span className={styles.item_right+ " " + styles.middle}><Link href="/signup">Signup</Link></span>
+                    <span className={styles.item_right+ " " + styles.middle}><Link href="/login">Iniciar sesión</Link></span>
                     </>    
                 }
                 {props.username &&
@@ -52,7 +60,7 @@ export default function Navigation(props) {
                             <div className={styles.divider}></div>
                             <div className={styles.dd_item}><Link href={user_URL}>Mi cuenta</Link></div>
                             <div className={styles.dd_item}><Link href={watchlist_URL}>Lista de reproducción</Link></div>
-                            <div className={styles.dd_item}><Link href={user_URL}>Lorem</Link></div>
+                            <div className={styles.dd_item}><Link href="/admin/control-panel">Administración</Link></div>
                             <div className={styles.dd_item}><Link href={settings_URL}>Configuración</Link></div>
                             <div className={styles.dd_item}><Link href={user_URL}>Random</Link></div>
                             <div className={styles.divider}></div>

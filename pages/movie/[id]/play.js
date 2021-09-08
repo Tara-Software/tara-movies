@@ -25,7 +25,7 @@ export default function Movie({ user, movie, data}) {
     // Obtener valor del volumen de localStorage
     useEffect(() => {
         const volume = window.localStorage.getItem("volume")
-        setVolume(volume)
+        setVolume(volume || 1)
     }, [])
     const reportChange = (e) => {
         var fc_icon = document.getElementsByClassName("fullscreen-icon")[0]
@@ -174,6 +174,7 @@ export default function Movie({ user, movie, data}) {
         <Head>
             <title>{data.title} | Tara Movies</title>
             <meta type="description" content="Página de previsualización"></meta>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </Head>
         <div className="background-movie" style={{width: '100%'}} onMouseMove={handleMouseMove}  onMouseDown={handleMouseMove}>
                 
@@ -189,7 +190,7 @@ export default function Movie({ user, movie, data}) {
                                 onDuration={handleDuration} 
                                 className="video-player" 
                                 onProgress={handleProgress} 
-                                url={`https://95.22.168.100:7777/videos/${movie}`}
+                                url={`http://95.22.168.100:7777/videos/${movie}`}
                                 playing={playing} 
                                 muted={mute} 
                                 volume={Number(volume)}
@@ -203,7 +204,7 @@ export default function Movie({ user, movie, data}) {
                         <div className="controls opacable">
                             <button className="play-pause play-bg-button" onClick={handlePause}></button>
                             <div className="progress-info">
-                                    <span style={{color:"white"}}>{playedSeconds}</span>
+                                    <span className="progress-value" style={{color:"white"}}>{playedSeconds}</span>
                                     <ProgressBar played={progressVideo} loaded={bufferVideo} handleSeek={handleSeekTo} duration={totalTime} durationS={durationToSeconds(totalTime)}></ProgressBar>
                                     <span style={{color:"white"}}>{durationToSeconds(totalTime)}</span>
                             </div>

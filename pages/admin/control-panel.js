@@ -12,10 +12,11 @@ export default function AdminPanel() {
         <Navigation username="Admin"/>
         <main className="padding">
            <h1>Bienvenido, administrador.</h1>
-           <fielset>
+           <fieldset>
                <legend>¿Qué queremos hacer hoy?</legend>
-               <div><Link href="/admin/add-movie"><a><button>Subir una nueva película</button></a></Link></div>
-           </fielset>
+               <div ><Link href="/admin/add-movie"><a><div className="submit-form tara-button" style={{width: "250px"}}>Subir una nueva película</div></a></Link></div>
+           </fieldset>
+
            
 
         </main>
