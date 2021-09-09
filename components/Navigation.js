@@ -16,14 +16,40 @@ export default function Navigation(props) {
             if(!event.target.className.includes("dd_")) {
                 var dd = document.getElementById("dd")
                 if(dd != null) dd.classList.remove("show")
+                var arrow = document.querySelector(".arrow")
+                if(arrow) {
+                    arrow.classList.remove("rotation")
+                }
+                if (window.matchMedia("(max-width: 450px)").matches) {
+                    /* La pantalla tiene menos de 450 píxeles de ancho */
+                    document.documentElement.style.overflowY = "initial"
+                    document.body.style.overflowY = "initial"
+                }
             }
         } 
     })
-
+    const exitMenu = () => {
+        document.getElementById("dd").classList.remove("show")
+        if (window.matchMedia("(max-width: 450px)").matches) {
+            /* La pantalla tiene menos de 450 píxeles de ancho */
+            document.documentElement.style.overflowY = "initial"
+            document.body.style.overflowY = "initial"
+        }
+    }
     /* When the user clicks on the button,
     toggle between hiding and showing the dropdown content */
     function toggleShowDropDown() {
         document.getElementById("dd").classList.add("show");
+        var arrow = document.querySelector(".arrow")
+        if(arrow) {
+            arrow.classList.add("rotation")
+        }
+        if (window.matchMedia("(max-width: 450px)").matches) {
+            /* La pantalla tiene menos de 450 píxeles de ancho */
+            document.documentElement.style.overflowY = "hidden"
+            document.body.style.overflowY = "hidden"
+        } 
+
     }
     
     
@@ -45,7 +71,7 @@ export default function Navigation(props) {
             <div className={styles.right}>
                 {!props.username &&
                     <>
-                    <span className={styles.item_right+ " " + styles.middle}><Link href="/login">Iniciar sesión</Link></span>
+                    <span className={styles.item_right+ " " + styles.middle + " login"}><Link href="/login">Iniciar sesión</Link></span>
                     </>    
                 }
                 {props.username &&
@@ -53,18 +79,20 @@ export default function Navigation(props) {
                     <div className={styles.dropdown}  onClick={toggleShowDropDown}>
                         <div className={styles.dd_cover}>
                             <Image src={image} width="32px" height="32px" className="dd_image"/>
-                            <span className={styles.dd_cover_name}>{props.username || ""}</span>
+                            <span className={styles.dd_cover_name + " arrow"}>{props.username || ""}</span>
                             </div>
                         <div className={styles.dd_content} id="dd">
-                            <div className={styles.dd_item}><Link href={user_URL}>{props.username}</Link></div>
+                            <div className={styles.dd_info}>
+                                <span className={styles.dd_title}>Opciones</span>
+                                <div className={styles.dd_close} onClick={exitMenu}><img src="/images/icons/close-outline-white.svg" /></div>
+                            </div>
+                            <Link href={user_URL}><div className={styles.dd_item}>{props.username}</div></Link>
                             <div className={styles.divider}></div>
-                            <div className={styles.dd_item}><Link href={user_URL}>Mi cuenta</Link></div>
-                            <div className={styles.dd_item}><Link href={watchlist_URL}>Lista de reproducción</Link></div>
-                            <div className={styles.dd_item}><Link href="/admin/control-panel">Administración</Link></div>
-                            <div className={styles.dd_item}><Link href={settings_URL}>Configuración</Link></div>
-                            <div className={styles.dd_item}><Link href={user_URL}>Random</Link></div>
+                            <Link href={user_URL}><div className={styles.dd_item}>Mi cuenta</div></Link>
+                            <Link href={watchlist_URL}><div className={styles.dd_item}>Lista de reproducción</div></Link>
+                            <Link href={settings_URL}><div className={styles.dd_item}>Configuración</div></Link>
                             <div className={styles.divider}></div>
-                            <div className={styles.dd_item}><Link href="/logout">Cerrar sesión</Link></div>
+                            <Link href="/logout"><div className={styles.dd_item}>Cerrar sesión</div></Link>
                         </div>
                     </div>
                     </>

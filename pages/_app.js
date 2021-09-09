@@ -8,7 +8,7 @@ class MyApp extends App {
 
     return(
       <>
-        <NextNProgress />
+        <NextNProgress color="#00c9de" />
         <Component {...pageProps} />
       </> 
     )

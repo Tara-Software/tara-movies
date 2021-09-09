@@ -7,7 +7,7 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
   const [inWatchlist, setInWatchlist] = useState(watchlist)
   const url_preview = "/movie/" + url + "/preview"
   const url_movie = "/movie/" + url + "/play"
-  var descritpion_short = description ? description.substring(0,150) + "..." : ""
+  var description_short = description ? description.substring(0,150) + "..." : ""
   
   const addToWatchList = async (e) => {
 
@@ -28,12 +28,22 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
       setInWatchlist(false)
     }
   }
+  const handleMouseOver = (e) => {
+    var over = e.target;
+    var closest = over.closest('.movies')
+    closest.classList.add("hovering")
+  }
+  const handleMouseLeave = (e) => {
+    var over = e.target;
+    var closest = over.closest('.movies')
+    closest.classList.remove("hovering")
+  }
     return (
-        <li className="movie-item">
+        <li className="movie-item" onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
           <div className="movie-item-thumbnail">
-            <Link href={url_preview}><a>
-              <Image src={thumbnail ? thumbnail : "/images/default.png"} width="300px" height="170px"/>
-            </a></Link>
+            <Link href={url_preview}>
+                            <img src={thumbnail ? thumbnail : "/images/default.png"}/>
+            </Link>
             
           </div>
           <div className="movie-item-hover">
@@ -65,7 +75,7 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
             </div>
             <div className="movie-item-data padding">
               <span className="movie-item-title">{title}</span>
-              <span className="movie-item-description">{descritpion_short}</span>
+              <span className="movie-item-description">{description_short}</span>
             </div>
             
           </div>

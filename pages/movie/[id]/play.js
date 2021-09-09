@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Head from 'next/head'
 import ProgressBar from '../../../components/ProgressBar'
+import Link from "next/link";
 
 export default function Movie({ user, movie, data}) {
     const [ playing   , setPlaying ]    = useState(false)
@@ -181,7 +182,7 @@ export default function Movie({ user, movie, data}) {
                 <div className="player-wrapper" id="playerWrapper" >
                     <FullScreen handle={handleFullSreen} onChange={reportChange}>
                         <span id="mask"></span>
-                        <button id="go-back" className="opacable" onClick={handleExit}></button>
+                        <Link href={document.URL.replace("/play", "/preview")}><button id="go-back" className="opacable"></button></Link>
 
                         <div className="video-wrapper">
                             <ReactPlayer 

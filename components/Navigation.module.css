@@ -65,8 +65,9 @@
 }
 .dropdown {
     margin-top: 16px;
-    width: 180px;
+    width: fit-content;
     transition: all 0.5s ease-in;
+    position: relative;
 }
 
 .dd_cover {
@@ -77,23 +78,55 @@
 .dd_cover_name {
     line-height: 32px;
     margin: 0 10px; 
+    position: relative;
 }
+
 .dd_cover img {
     border-radius: 50%;
+    object-fit: cover;
 }
 .dd_content {
     display: none;
-    position: relative;
-    background-color: aqua;
+    position: absolute;
+    width: max-content;
+    right: 0;
+    background-color: #003C52;
     padding: 5px 0;
     margin-top: 10px;   
- 
+    border: 1px solid #00818F;
+    border-radius: 4px;
+    -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.65); 
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.65);
+}
+.dd_content::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 15px solid #00818F;
+    top: -15px;
+    right: 10px;
+}
+.dd_content::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 14px solid #003C52;
+    top: -13px;
+    right: 11px;
 }
 .divider {
     width: 100%;
     height: 1px;
-    background-color: black;
-    margin: 5px 0;
+    margin: 10px 0;
+    border-bottom: 1px solid #00202C;
 }
 .dd_item:first-child:hover {
     background-color: initial;
@@ -102,7 +135,59 @@
     padding: 5px 10px;
     word-break: break-all;
     cursor: pointer;
+    color: #fdfefe;
+}
+.dd_item a {
+    color: #fdfefe;
 }
 .dd_item:hover {
     background-color: teal;
+}
+.dd_info {
+    display: none;
+}
+@media (max-width: 450px) {
+    .dd_content {
+        width: 100%;
+        position: fixed;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: 0;
+        border: none;
+    }
+    .dd_info {
+        display: flex;
+        align-items: center;
+        padding: 10px 10px;
+    }
+    .dd_title {
+        color: #fdfefe;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+    .dd_close {
+        width: 32px;
+        margin-left: auto;
+        margin-right: 10px;
+        height: auto;
+        cursor: pointer;
+    }
+    .dd_close:hover {
+        filter: brightness(0.9);
+    }
+    .dd_close:active {
+        filter: brightness(0.8);
+    }
+    .dd_item {
+        margin-top: 10px;
+        padding-left: 10px;
+    }
+}
+
+@media (max-width: 345px) {
+    .dd_cover_name {
+        display: none;
+    }
 }

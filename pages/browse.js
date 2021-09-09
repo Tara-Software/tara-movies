@@ -48,7 +48,7 @@ export default function Home({ initialMovies,directors,genres, user }) {
     var query = ""
     switch(query_restriction) {
       case "directorId":
-        query = "Director: "
+        query = "director: "
         var director = ""
         for(var dir of directors) {
           if(dir.id == query_restriction_value) {
@@ -59,7 +59,7 @@ export default function Home({ initialMovies,directors,genres, user }) {
         query += director;
         break;
       case "genreId":
-        query="Género: "
+        query="género: "
         for(var genre of genres) {
           if(genre.id == query_restriction_value) {
             query += genre.name.charAt(0).toUpperCase() + genre.name.substring(1)
@@ -90,6 +90,18 @@ export default function Home({ initialMovies,directors,genres, user }) {
 
     });
   }
+  const scrollForward = (e) => {
+    var over = e.target;
+    var closest = over.closest('.movies');
+    var scroll = closest.getElementsByClassName("scroll-movies")[0]
+    var mobile_scroll = over.closest('.mobile-scroll')
+
+    // Esto solo funciona una puta vez 
+    scroll.scroll({
+      left: 223,
+      behavior: 'smooth'
+    })
+  }
   return (
     <>
       <Head>
@@ -104,8 +116,7 @@ export default function Home({ initialMovies,directors,genres, user }) {
           <div className="ul-header">
               <h3 className="ul-label">Descubrir</h3>
           </div>
-          <ul className="no-padding">
-            
+          <ul className="no-padding scroll-movies">
             {initialMovies.map(({id, title, description, thumbnail}) => {
               const inWatchlist = moviesInWatchlist.includes(id)
               return (
@@ -113,13 +124,14 @@ export default function Home({ initialMovies,directors,genres, user }) {
                 )
           })}
           </ul>
+          <div className="mobile-scroll" onClick={scrollForward}><img src="/images/icons/chevron-forward-white.svg"></img></div>
         </section>
         <div className="section-divider"></div>
         <section className="movies">
-          <ul className="no-padding">
-          <div className="ul-header medium">
-              <h3 className="ul-label">Lista de reproducción</h3>
-          </div>
+        <div className="ul-header medium">
+            <h3 className="ul-label">Lista de reproducción</h3>
+        </div>
+        <ul className="no-padding scroll-movies">
           {
             user.watchlists.map(({movie}, index) => {
                 const inWatchlist = moviesInWatchlist.includes(movie.id)
@@ -127,14 +139,15 @@ export default function Home({ initialMovies,directors,genres, user }) {
             })
             
           }
-          </ul>
+        </ul>
+        <div className="mobile-scroll" onClick={scrollForward}><img src="/images/icons/chevron-forward-white.svg"></img></div>
         </section>
         </>}
         {restriction && <>
           <section className="movies">
             <ul className="no-padding">
               <div className="ul-header">
-                <h3 className="ul-label">{parseRestriction()}</h3>
+                <h3 className="ul-label"> Resultados de {parseRestriction()}</h3>
               </div>
               {renderRestriction()}
               </ul>
