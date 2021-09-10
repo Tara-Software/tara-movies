@@ -14,7 +14,7 @@ export default function Movie({ user, movie, data}) {
 
     const addToWatchList = async (e) => {
 
-        const addedtowatchlist = await fetch(`${process.env.API_URL}/api/movie/wannawatch`, {
+        const addedtowatchlist = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/movie/wannawatch`, {
             method: 'POST',
             body: JSON.stringify({email: user.email, movie: movie})
         })
@@ -22,7 +22,7 @@ export default function Movie({ user, movie, data}) {
     }
 
     const removeWatchList = async (e) => {
-        const removed = await fetch(`${process.env.API_URL}/api/movie/removewatchlist`, {
+        const removed = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/movie/removewatchlist`, {
         method: 'POST',
         body: JSON.stringify({email: user.email, movie: movie})
         })
