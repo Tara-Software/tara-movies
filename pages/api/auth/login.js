@@ -15,7 +15,7 @@ export default async function handle(req, res) {
     if(exists) {
         // Devolver el usuario y un token de sesion??
         if(exists.password != password)  {
-            throw new Error("Usuario o contraseña incorrectos")
+            return res.status(401).json({error: "Usuario o contraseña incorrectos."})
         }
 
         // Create new session inside login
@@ -51,8 +51,8 @@ export default async function handle(req, res) {
             nookies.set({ res }, 'accessToken', accessToken, { maxAge: 72576000, httpOnly: true, path: '/' })
             return res.status(200).json({})
         } else {
-            return res.status(400).json({ "error" : "usuario o contraseña incorrectos"})
+            return res.status(401).json({ "error" : "usuario o contraseña incorrectos"})
         }
     }
-    throw new Error("Usuario o contraseña incorrectos")
+    return res.status(401).json({error: "Usuario o contraseña incorrectos"});
 }

@@ -15,7 +15,7 @@ export async function getServerSideProps(ctx) {
     // Si el token no es correcto o no está autenticado, a la puta calle
     return {
       redirect: {
-        destination: '/signup',
+        destination: '/',
         permanent: false,
       },
     };
@@ -90,15 +90,24 @@ export default function Home({ initialMovies,directors,genres, user }) {
 
     });
   }
-  const scrollForward = (e) => {
-    var over = e.target;
-    var closest = over.closest('.movies');
-    var scroll = closest.getElementsByClassName("scroll-movies")[0]
-    var mobile_scroll = over.closest('.mobile-scroll')
 
-    // Esto solo funciona una puta vez 
+  // TODO: Calcular mejor cuánto ha de moverse. Prime tiene una función muy bonita para eso pero mejor la hacemos nosotros
+  // TODO: Check if no more scroll and disable??
+  const getClosestScroll = (element) => {
+    return element.closest('.movies').getElementsByClassName("scroll-movies")[0]
+    
+  }
+  const scrollForward = (e) => {
+    var scroll = getClosestScroll(e.target);
     scroll.scroll({
-      left: 223,
+      left: scroll.scrollLeft + 231,
+      behavior: 'smooth'
+    })
+  }
+  const scrollBackwards = (e) => {
+    var scroll = getClosestScroll(e.target);
+    scroll.scroll({
+      left: scroll.scrollLeft - 231,
       behavior: 'smooth'
     })
   }
@@ -116,6 +125,7 @@ export default function Home({ initialMovies,directors,genres, user }) {
           <div className="ul-header">
               <h3 className="ul-label">Descubrir</h3>
           </div>
+          <div className="mobile-scroll backwards" onClick={scrollBackwards}><img src="/images/icons/chevron-forward-white.svg"></img></div>
           <ul className="no-padding scroll-movies">
             {initialMovies.map(({id, title, description, thumbnail}) => {
               const inWatchlist = moviesInWatchlist.includes(id)
@@ -128,10 +138,11 @@ export default function Home({ initialMovies,directors,genres, user }) {
         </section>
         <div className="section-divider"></div>
         <section className="movies">
-        <div className="ul-header medium">
+          <div className="ul-header medium">
             <h3 className="ul-label">Lista de reproducción</h3>
-        </div>
-        <ul className="no-padding scroll-movies">
+          </div>
+          <div className="mobile-scroll backwards" onClick={scrollBackwards}><img src="/images/icons/chevron-forward-white.svg"></img></div>
+          <ul className="no-padding scroll-movies">
           {
             user.watchlists.map(({movie}, index) => {
                 const inWatchlist = moviesInWatchlist.includes(movie.id)
@@ -139,8 +150,8 @@ export default function Home({ initialMovies,directors,genres, user }) {
             })
             
           }
-        </ul>
-        <div className="mobile-scroll" onClick={scrollForward}><img src="/images/icons/chevron-forward-white.svg"></img></div>
+          </ul>
+          <div className="mobile-scroll" onClick={scrollForward}><img src="/images/icons/chevron-forward-white.svg"></img></div>
         </section>
         </>}
         {restriction && <>

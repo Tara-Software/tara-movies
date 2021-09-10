@@ -22,7 +22,12 @@ export default function Signup() {
             method: 'POST',
             body: JSON.stringify({name: username, email: email, password: hashed_password})
         });
-        if(response && response.ok) {
+        console.log(response)
+        if(response && response.status == 401 || response.status == 500) {
+            var error_json = await response.json();
+            document.getElementById("error").innerText = error_json.error;
+            document.getElementById("error").classList.add("tara-error-show")
+        } else {
             const res = await response.json()
 
             // Creamos una nueva sesión para el usuario maldito
@@ -57,11 +62,12 @@ export default function Signup() {
         <div className="container">
             <div className="form-container center">
                 <h1 >Regístrate</h1>
+                <div className="tara-error" id="error"></div>
                 <form onSubmit={submitData}>
                     <div className="input-wrapper">
                         <div className="input-wrapper-relative">
                             <label className="input_username">
-                                <input className="tara-input" type="text" id="username" maxLength="15" pattern="^\S+$" title="Solo se permiten 15 letras sin espacios" onBlur={outFocus} onFocus={focusInput} onChange={(e) => setUsername(e.target.value)} required/>
+                                <input className="tara-input" type="text" id="username" maxLength="15" title="Solo se permiten usuarios de 15 letras sin espacios (las ñ no van)" onBlur={outFocus} onFocus={focusInput} onChange={(e) => setUsername(e.target.value)} required/>
                                 <label className="place-label" id="username-label" htmlFor="username">Nombre de usuario</label>
                             </label>
                         </div>

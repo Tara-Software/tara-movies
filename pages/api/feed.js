@@ -33,7 +33,6 @@ export default async function handle(req, res) {
             }
             const genres = await getGenres(fields.genres)
 
-            console.log(genres)
             const prisma_response = await prisma.movie.create({
                 data: {
                     title: fields.title,
@@ -63,6 +62,8 @@ export default async function handle(req, res) {
             await saveFile(files.thumbnail, thumbnail)
             resolve(prisma_response)
         } catch(error) {
+            console.error(error)
+            return res.status(401).json({error: "Algo has hecho mal en la subida del video."})
             reject(error)
         }
         

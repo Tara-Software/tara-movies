@@ -33,13 +33,16 @@ export default function Login({username}) {
             const response = await fetch(`http://localhost:3000/api/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify(payload)
-            })
+            });
 
-            if(response.ok) {
-                
+            if(response.status == 401) {
+                var error = await response.json();
+                console.log(error)
+                document.getElementById("error").innerText = error.error;
+                document.getElementById("error").classList.add("tara-error-show");
+            } else {
+                router.push("/browse")    
             }
-            
-            router.push("/browse")
         } catch(error) {
             console.log(error)
         }
@@ -50,6 +53,7 @@ export default function Login({username}) {
             <div className="container">
                 <div className="form-container center">
                     <h1>Inicia sesión</h1>
+                    <div className="tara-error" id="error"></div>
                     <form onSubmit={handleLogin}>
                         
                         <div className="input-wrapper">

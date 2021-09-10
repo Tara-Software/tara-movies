@@ -28,24 +28,37 @@ export default function AdminPanel(props) {
         const res = await fetch(`http://localhost:3000/api/feed`,{
             method: 'POST',
             body
-        })
+        });
+        if(res.status == 401) {
+            var errorMsg = await res.json()
+            var errsuc = document.getElementById("error-success");
+            errsuc.classList.remove("tara-success-show")
+            errsuc.classList.add("tara-error-show")
+            
+            errsuc.innerText = errorMsg.error
+        } else {
         // Obtenemos el id para que se llame así el archivo mp4
-        const { id } = await res.json();
-        const video_form = new FormData();
-        video_form.append("video", video, id + '.mp4');
-        try {    
-            var response = await fetch("http://localhost:3000/api/video_to_server", {
-                body: video_form,
-                method: 'POST'
-            });
-            if(response.status == 200) {
-                document.getElementById("add-movie-form").reset();
-                document.getElementById("success-uploading").style.display = "block"
-            } else {
-                document.getElementById("error-uploading").style.display = "block"
+            const { id } = await res.json();
+            const video_form = new FormData();
+            video_form.append("video", video, id + '.mp4');
+            try {    
+                var response = await fetch("http://localhost:3000/api/video_to_server", {
+                    body: video_form,
+                    method: 'POST'
+                });
+                console.log(response.status)
+                if(response.status == 200) {
+                    var errsuc = document.getElementById("error-success");
+                    errsuc.classList.add("tara-success-show")
+                    errsuc.innerText = "Todo bien!!"
+                } else {
+                    errsuc.classList.remove("tara-success-show")
+                    errsuc.classList.add("tara-error-show")
+                    errsuc.innerText = "Algo falló en la escritura del vídeo a la base de datos."
+                }
+            } catch(error) {
+                console.log(error)
             }
-        } catch(error) {
-            console.log(error)
         }
     }
     const uploadToClient = (e) => {
@@ -85,8 +98,7 @@ export default function AdminPanel(props) {
             
             <form onSubmit={feedDB} id="add-movie-form">
             <div style={{fontSize: "1.4em", color:"white", fontWeight: "bold", margin: "30px 0"}} className="w400">Elegir película para ir tirando</div>
-                <div id="success-uploading" style={{display:"none"}}>Succesión!!</div>
-                <div id="error-uploading"style={{display:"none"}}>Algo no ha ido como esperaba</div>
+                <div className="tara-error w400" id="error-success"></div>
                 <div className="input-wrapper w400">
                     <div className="input-wrapper-relative input-video-wrapper">
                         <label htmlFor="file" id="file-label">

@@ -1,9 +1,14 @@
 import Navigation from "../components/Navigation"
 import Link from "next/link";
+import Head from 'next/head';
 import { getUserAuth } from "../lib/auth"
 export default function Index() {
     return (
-        <>
+        <>  
+            <Head>
+                <title>Tara Movies</title>
+                
+            </Head>
             <Navigation />
             <main className="welcome-page">
                 <div className="welcome-page-wrapper">

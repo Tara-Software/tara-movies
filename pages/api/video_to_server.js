@@ -38,7 +38,8 @@ export default async function handle(req, res) {
 
         form.on('error', function(err) {
             console.log(error)
-            res.status(500).send(error)
+            console.log("Soy yo!")
+            res.status(500).json("Todo mal")
         });
         form.on('close', function() {
             res.status(200).send("received upload")
@@ -46,8 +47,9 @@ export default async function handle(req, res) {
 
         form.parse(req)
     } else {
-        res.status(404).send("")
+        res.status(500).json({error: "algo mal"})
     }
+    return res
 } 
 
 // })
