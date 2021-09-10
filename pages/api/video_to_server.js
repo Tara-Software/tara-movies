@@ -31,7 +31,7 @@ export default async function handle(req, res) {
                 }
             };
             request.post({
-                url: `http://95.22.168.100/7777/upload`,
+                url: `${process.env.NEXT_PUBLIC_VIDEOS_URL}/upload`,
                 formData: formData,
             });
         });

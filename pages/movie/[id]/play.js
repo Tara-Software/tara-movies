@@ -191,7 +191,7 @@ export default function Movie({ user, movie, data}) {
                                 onDuration={handleDuration} 
                                 className="video-player" 
                                 onProgress={handleProgress} 
-                                url={`http://95.22.168.100/7777/videos/${movie}`}
+                                url={`${process.env.NEXT_PUBLIC_VIDEOS_URL}/videos/${movie}`}
                                 playing={playing} 
                                 muted={mute} 
                                 volume={Number(volume)}
