@@ -30,7 +30,7 @@ export default function Login({username}) {
         let payload = {email: email, password: hashed_password}      
 
         try {
-            const response = await fetch(`http://localhost:3000/api/auth/login`, {
+            const response = await fetch(`${process.env.API_URL}/api/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify(payload)
             });

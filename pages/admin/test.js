@@ -10,7 +10,7 @@ export default function AdminPanel() {
         const body = new FormData();
 
         body.append("video", video);
-        const response = await fetch("http://localhost:3000/api/test",
+        const response = await fetch("${process.env.API_URL}/api/test",
         {
             body,
             method: 'POST'

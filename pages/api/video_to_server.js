@@ -31,7 +31,7 @@ export default async function handle(req, res) {
                 }
             };
             request.post({
-                url: "http://localhost:3001/upload",
+                url: `${process.env.VIDEOS_URL}/upload`,
                 formData: formData,
             });
         });
