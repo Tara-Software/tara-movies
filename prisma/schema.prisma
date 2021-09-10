@@ -6,6 +6,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// datasource db {
+//   provider = "sqlite"
+//   url = "file:./dev.db"
+// }
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -49,14 +54,20 @@ model Movie {
 
 model Director {
   id            String  @id @default(cuid())
-  name          String 
+  name          String  @unique
   movies        Movie[]
-  description   String?
 }
+
+// Algún día
+//model Casting {
+//  id            String  @id @default(cuid())
+//  name          String  @unique
+//  movies        Movie[]
+//}
 
 model Genre {
   id            String          @id @default(cuid())
-  name          String
+  name          String          @unique
   movies        GenreOnMovie[]
 }
 

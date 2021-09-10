@@ -1,5 +1,4 @@
 export default function Form({elements}, submit) {
-    console.log(elements)
     const outFocus = (e) => {
         var label = document.getElementById(e.target.id + "-label")
         if(!e.target.value) {

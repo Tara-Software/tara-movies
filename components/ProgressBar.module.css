@@ -6,7 +6,6 @@
     margin: 0 10px;
     position: relative;
 }
-
 .bg {
     background-color: white;
     width: 100%;
@@ -14,7 +13,7 @@
     border-radius: 5px;
 }
 .progress {
-    background-color: cyan;
+    background-color: #008796;
     height: 7px;
     width: 50%;
     border-radius: 5px;
@@ -24,12 +23,17 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: red;
+    border:2px solid #00C9DE;
+    background-color: #00202C;
     z-index: 99999;
     position: absolute;
     top: 51%;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
+    transition: filter 0.2s ease;
+}
+.progress_button:hover {
+    filter: brightness(0.8)
 }
 .buffer {
     background-color: grey;

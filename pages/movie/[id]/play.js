@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Head from 'next/head'
 import ProgressBar from '../../../components/ProgressBar'
+import Link from "next/link";
 
 export default function Movie({ user, movie, data}) {
     const [ playing   , setPlaying ]    = useState(false)
@@ -25,7 +26,7 @@ export default function Movie({ user, movie, data}) {
     // Obtener valor del volumen de localStorage
     useEffect(() => {
         const volume = window.localStorage.getItem("volume")
-        setVolume(volume)
+        setVolume(volume || 1)
     }, [])
     const reportChange = (e) => {
         var fc_icon = document.getElementsByClassName("fullscreen-icon")[0]
@@ -55,7 +56,7 @@ export default function Movie({ user, movie, data}) {
         res += parseInt(time % 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
         // minutos
         res = ":" + res
-        res = parseInt(time / 60).toLocaleString("es-ES", {minimumIntegerDigits:2}) + res
+        res = parseInt(time % 3600 / 60).toLocaleString("es-ES", {minimumIntegerDigits:2}) + res
         if(parseInt(time/3600) > 0 ) {
             res = parseInt(time/3600) + ":" + res
         }
@@ -65,7 +66,8 @@ export default function Movie({ user, movie, data}) {
     const durationToSeconds = (duration) => {
         var res = ""
         const seconds = parseInt(duration % 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
-        const minutes = parseInt(duration / 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
+        const minutes = parseInt(duration % 3600 / 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
+        // const minutes = parseInt(duration % 60).toLocaleString("es-ES", {minimumIntegerDigits:2})
         if(parseInt(duration/3600) > 0 ) {
             res = parseInt(duration/3600) + ":" + res
         }
@@ -173,13 +175,14 @@ export default function Movie({ user, movie, data}) {
         <Head>
             <title>{data.title} | Tara Movies</title>
             <meta type="description" content="Página de previsualización"></meta>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </Head>
         <div className="background-movie" style={{width: '100%'}} onMouseMove={handleMouseMove}  onMouseDown={handleMouseMove}>
                 
                 <div className="player-wrapper" id="playerWrapper" >
                     <FullScreen handle={handleFullSreen} onChange={reportChange}>
                         <span id="mask"></span>
-                        <button id="go-back" className="opacable" onClick={handleExit}></button>
+                        <Link href={document.URL.replace("/play", "/preview")}><button id="go-back" className="opacable"></button></Link>
 
                         <div className="video-wrapper">
                             <ReactPlayer 
@@ -188,7 +191,7 @@ export default function Movie({ user, movie, data}) {
                                 onDuration={handleDuration} 
                                 className="video-player" 
                                 onProgress={handleProgress} 
-                                url={`https://95.22.168.100:7777/videos/${movie}`} 
+                                url={`${process.env.VIDEOS_URL}/videos/${movie}`}
                                 playing={playing} 
                                 muted={mute} 
                                 volume={Number(volume)}
@@ -202,7 +205,7 @@ export default function Movie({ user, movie, data}) {
                         <div className="controls opacable">
                             <button className="play-pause play-bg-button" onClick={handlePause}></button>
                             <div className="progress-info">
-                                    <span style={{color:"white"}}>{playedSeconds}</span>
+                                    <span className="progress-value" style={{color:"white"}}>{playedSeconds}</span>
                                     <ProgressBar played={progressVideo} loaded={bufferVideo} handleSeek={handleSeekTo} duration={totalTime} durationS={durationToSeconds(totalTime)}></ProgressBar>
                                     <span style={{color:"white"}}>{durationToSeconds(totalTime)}</span>
                             </div>

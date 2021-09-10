@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../../lib/prisma';
 
-const prisma = new PrismaClient()
-
+// const prisma = new PrismaClient()
 export default async function handle(req, res) {
     const { accessToken } = JSON.parse(req.body)
     const user = await prisma.session.findMany({
@@ -25,7 +24,7 @@ export default async function handle(req, res) {
             }
         }
     })
-    if(user) {
+    if(user.length > 0) {
         return res.status(200).json(user[0])
     } else {
         return res.status(400).json({"error": "Usuario no encontrado"})

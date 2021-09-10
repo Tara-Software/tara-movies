@@ -1,6 +1,6 @@
-import  { PrismaClient } from '@prisma/client'
+import prisma from '../../../lib/prisma';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient()
 
 export default async function handle(req, res) {
     const data = JSON.parse(req.body)

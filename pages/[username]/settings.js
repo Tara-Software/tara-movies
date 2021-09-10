@@ -3,6 +3,7 @@ import { useState } from "react";
 import Navigation from "../../components/Navigation";
 import { getUserAuthorization } from "../../lib/auth";
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function ControlPanel({user, params}) {
 
@@ -20,13 +21,12 @@ export default function ControlPanel({user, params}) {
         body.append("file", avatar);
         
         try {
-            const response = await fetch(`https://tara-movies.vercel.app/api/auth/update`, {
+            const response = await fetch(`${process.env.API_URL}/api/auth/update`, {
                 method: 'POST',
                 body
             });
             if(response.ok) {
                 const data = await response.json()
-                console.log("todo bien")
 
                 router.push("/"+data.username+"/settings")
                 // Poner que todo es correcto
@@ -48,7 +48,7 @@ export default function ControlPanel({user, params}) {
     const uploadToClient = (event) => {
         if(event.target.files && event.target.files[0]) {
             const i = event.target.files[0];
-
+            
             setAvatar(i);
             setCreateObjectURL(URL.createObjectURL(i));
 
@@ -63,41 +63,54 @@ export default function ControlPanel({user, params}) {
         </Head>
         <Navigation username={user.name} avatar={user.avatar} />
         <div className="container padding">
-                <div className="form-container">
-                <h1>Hola {params} :)</h1>
-                <p>Demo page: puedes hacer cosas pero de poco sirve la verdad</p>
-
+            <div className="info-account padding-10">
+                <div className="info-account-img">
+                    <img src={user.avatar} />
+                </div>
+                <div className="info-account-text">
+                    <span className="info-account-name">{user.name}</span>    
+                    <span className="info-account-exit">Cuenta personal<Link href="/logout">
+                        <a>
+                            <img className="swap-icon" src="/images/icons/swap-horizontal-outline-color.svg" />
+                            Cerrar sesión
+                        </a></Link>
+                    </span>
+                </div>
+            </div>            
+            <section className="settings-section padding-10">
+                <div className="ss-title">
+                    <span>Perfil público</span>
+                </div>
+                <div className="">
                     <form onSubmit={handleUpdate}>
-                        
-                        <div className="input-wrapper">
+                    <div className="input-wrapper w400 avatar-input-wrapper">
+                            <div className="avatar-input">
+                                <img className="avatar-input-img" src={createObjectURL ? createObjectURL : user.avatar} />
+                                <label htmlFor="upload_avatar" className="tara-button avatar-input-button">Editar</label>
+                                <input className="avatar-input hide" type="file" id="upload_avatar" onChange={uploadToClient}/>
+                            </div>
+                        </div>
+                        <div className="input-wrapper w400">
                             <div className="input-wrapper-relative">
                                 <label className="input_username">
-                                <input type="text" id="username" maxLength="15" value={username} pattern="^\S+$" title="Solo se permiten 15 letras sin espacios" onBlur={outFocus} onFocus={focusInput} onChange={(e) => setUsername(e.target.value)} required/>
+                                <input className="tara-input" type="text" id="username" maxLength="15" value={username} pattern="^\S+$" title="Solo se permiten 15 letras sin espacios" onBlur={outFocus} onFocus={focusInput} onChange={(e) => setUsername(e.target.value)} required/>
                                     <label className={username ? "place-label set" : "place-label"} id="username-label" htmlFor="username">Nombre de usuario</label>
                                 </label>
                             </div>
                         </div>
-                        <div className="input-wrapper">
+                        <div className="input-wrapper w400">
                             <div className="input-wrapper-relative">
                                 <label className="input_email">
-                                    <input type="email" id="email" value={user.email} onFocus={focusInput} onBlur={outFocus} disabled={true}/>
-                                    
+                                    <input className="tara-input disabled" type="email" id="email" value={user.email} onFocus={focusInput} onBlur={outFocus} disabled={true}/>
                                     <label className="place-label set" id="email-label" htmlFor="email">Correo electrónico</label>
                                 </label>
                             </div>
                         </div>
-                        <div className="input-wrapper">
-                            <div className="input-wrapper-relative">
-                                <label className="input_avatar">
-                                    <input type="file" id="avatar" onFocus={focusInput} onBlur={outFocus} onChange={uploadToClient}/>
-                                    <label className="place-label set" id="avatar-label" htmlFor="avatar">Avatar</label>
-                                </label>
-                            </div>
-                        </div>
-                        <button className="submit-form">Guardar cambios</button>
+                        <button className="submit-form tara-button w400">Guardar cambios</button>
                     </form>
                 </div>
-            </div>
+            </section>
+        </div>
 
         </>
     )

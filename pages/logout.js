@@ -11,11 +11,10 @@ export async function getServerSideProps(ctx) {
     const cookie = nookies.get(ctx)
     if(cookie.accessToken) {
         try {
-            const destroyed = await fetch(`https://tara-movies.vercel.app/api/auth/logout`, {
+            const destroyed = await fetch(`${process.env.API_URL}/api/auth/logout`, {
             method: 'POST',
             body: JSON.stringify(cookie.accessToken)
             })
-            console.log(destroyed)
         } catch(e) {
             console.log(e)
         } finally {

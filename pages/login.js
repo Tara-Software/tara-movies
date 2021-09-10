@@ -27,19 +27,22 @@ export default function Login({username}) {
     const handleLogin = async (e) => {
         e.preventDefault()
         const hashed_password = encrypt_password(password)
-        let payload = {email: email, password: hashed_password}
-        
+        let payload = {email: email, password: hashed_password}      
 
         try {
-            const response = await fetch(`https://tara-movies.vercel.app/api/auth/login`, {
+            const response = await fetch(`${process.env.API_URL}/api/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify(payload)
-            })
+            });
 
-            if(response.ok) {
+            if(response.status == 401) {
+                var error = await response.json();
+                console.log(error)
+                document.getElementById("error").innerText = error.error;
+                document.getElementById("error").classList.add("tara-error-show");
+            } else {
+                router.push("/browse")    
             }
-            
-            router.push("/browse")
         } catch(error) {
             console.log(error)
         }
@@ -50,12 +53,13 @@ export default function Login({username}) {
             <div className="container">
                 <div className="form-container center">
                     <h1>Inicia sesión</h1>
+                    <div className="tara-error" id="error"></div>
                     <form onSubmit={handleLogin}>
                         
                         <div className="input-wrapper">
                             <div className="input-wrapper-relative">
                                 <label className="input_email">
-                                    <input type="text" id="email" onBlur={outFocus} onFocus={focusInput} onChange={(e) => (setEmail(e.target.value))} required={true}/>
+                                    <input className="tara-input" type="text" id="email" onBlur={outFocus} onFocus={focusInput} onChange={(e) => (setEmail(e.target.value))} required={true}/>
                                     <label className="place-label" id="email-label" htmlFor="email">Correo electrónico</label>
                                 </label>
                             </div>
@@ -63,12 +67,12 @@ export default function Login({username}) {
                         <div className="input-wrapper">
                             <div className="input-wrapper-relative">
                                 <label className="input_password">
-                                    <input type="password" id="password" onFocus={focusInput} onBlur={outFocus} onChange={(e) => (setPassword(e.target.value))} required={true}/>
+                                    <input className="tara-input" type="password" id="password" onFocus={focusInput} onBlur={outFocus} onChange={(e) => (setPassword(e.target.value))} required={true}/>
                                     <label className="place-label" id="password-label" htmlFor="password">Contraseña</label>
                                 </label>
                             </div>
                         </div>
-                        <button className="submit-form" >Iniciar sesión</button>
+                        <button className="submit-form tara-button">Iniciar sesión</button>
                     </form>
                 </div>
             </div>
