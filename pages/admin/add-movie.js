@@ -1,4 +1,5 @@
 import Head from "next/head"
+import router from "next/router"
 import { useState } from "react"
 import Navigation from "../../components/Navigation"
 import { getUserAuthorization } from "../../lib/auth"
@@ -87,7 +88,11 @@ export default function AdminPanel(props) {
         var label = document.getElementById(e.target.id + "-label")
         label.classList.add("set")
     }
+    const goBack = (e) => {
+        e.preventDefault();
+        router.push("/admin/control-panel")
 
+    }
     return (
         <>
         <Head>
@@ -157,7 +162,10 @@ export default function AdminPanel(props) {
                         <input className="miniature-input hide" type="file" id="upload_miniature" onChange={uploadToClient}/>
                     </div>
                 </div>
-                <div className="submit-form upload-movie w400" style={{marginTop: "20px"}}><button className="submit-form  tara-button w400" type="submit">Subir película</button></div>
+                <div className="submit-form-upload-movie w400">
+                    <button className="submit-form  tara-button w400" type="submit">Subir película</button>
+                    <div style={{marginTop: "10px"}} className="submit-form cancel tara-button w400" onClick={goBack}>Cancelar</div>
+                </div>
             </form>
         </main>
         </>

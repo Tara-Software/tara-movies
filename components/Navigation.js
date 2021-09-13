@@ -88,8 +88,9 @@ export default function Navigation(props) {
                             </div>
                             <Link href={user_URL}><div className={styles.dd_item}>{props.username}</div></Link>
                             <div className={styles.divider}></div>
-                            <Link href={user_URL}><div className={styles.dd_item}>Mi cuenta</div></Link>
+                            {/* <Link href={user_URL}><div className={styles.dd_item}>Mi cuenta</div></Link> */}
                             <Link href={watchlist_URL}><div className={styles.dd_item}>Lista de reproducción</div></Link>
+                            <Link href="/admin/control-panel"><div className={styles.dd_item}>Admininistración</div></Link>
                             <Link href={settings_URL}><div className={styles.dd_item}>Configuración</div></Link>
                             <div className={styles.divider}></div>
                             <Link href="/logout"><div className={styles.dd_item}>Cerrar sesión</div></Link>

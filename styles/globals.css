@@ -36,7 +36,13 @@ a:hover {
 .login:hover a {
   color: #012;
 }
-
+fieldset {
+  width: 100%;
+  border-radius: 5px;
+  max-width: 405px;
+  margin: 0 auto;
+  text-align: center;
+}
 * {
   box-sizing: border-box;
 }
@@ -101,7 +107,9 @@ textarea {
 }
 .decoration {
   border: none;
-  width: 405px;
+  max-width: 405px;
+  width: available;
+  width: -moz-available;
   height: 300px;
 }
 .arrow::after {
@@ -167,7 +175,7 @@ textarea {
   max-width: fit-content;
 }
 .welcome-title {
-  font-size: 3em;
+  font-size: 2.5em;
   display: inline-block;
   margin-bottom: 5px; 
 
@@ -276,6 +284,12 @@ textarea {
 .show {
   display: block !important;
   opacity: 1 !important;
+}
+.submit-form-upload-movie {
+  position: absolute;
+top: 275px;
+right: 0;
+width: 405px;
 }
 .submit-form {
   width: 100%;
@@ -398,6 +412,7 @@ textarea {
 }
 .movie-item-play-button-text {
   margin-left: 10px;
+  font-size: 1em;
 }
 .movie-item-add-watchlist {
   height: 30px;
@@ -453,6 +468,24 @@ textarea {
 }
 .mobile-scroll {
   display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 90px;
+  right: 0;
+  width: 60px;
+  height: 116px;
+  background: #00000020;
+}  
+.backwards {
+  left: 0;
+  right: unset;
+  transform: rotate(180deg);
+  z-index: 10;
+}
+.mobile-scroll img {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%)
 }
 @media (max-width: 1000px) {
   .movie-item-thumbnail img {
@@ -476,6 +509,13 @@ textarea {
     overflow: hidden;
     font-size: 0.8em;
   }
+  .movie-item-play-button-text {
+    font-size: 0.9em;
+    margin-left: 5px;
+  }
+  .movie-item-add-watchlist {
+    margin-left: 0;
+  }
   .movie-item-add-watchlist-hover {
     font-size: 0.9em;
   }
@@ -491,25 +531,8 @@ textarea {
   }
   .mobile-scroll {
     display: block;
-    cursor: pointer;
-    position: absolute;
-    top: 90px;
-    right: 0;
-    width: 60px;
-    height: 116px;
-    background: #00000020;
   }
-  .backwards {
-    left: 0;
-    right: unset;
-    transform: rotate(180deg);
-    z-index: 999;
-  }
-  .mobile-scroll img {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%)
-  }
+
 }
 /** MOVIE PREVIEW **/
 .preview-wrapper {
@@ -573,29 +596,36 @@ textarea {
   vertical-align: middle;
   font-size: 0.7em;
 }
-.watchlist-wrapper {
-  height: max-content;
+.secondary-actions {
+  justify-content: center;
+  margin: 10px auto;
+  display: flex;
 }
-.watchlist-button {
+.action-movie-wrapper {
+  height: max-content;
+  margin: 0 5px;
+  display: inline-block;
+}
+.action-movie-button {
   width: 50px;
   height: 50px;
   background-color: #324b4f;
   border-radius: 50%;
   display: block;
-
+  text-align: center;
   cursor: pointer;
   position: relative;
   margin: 10px auto;
   transition: all 0.1s ease;
 }
-.watchlist-button:hover {
+.action-movie-button:hover {
 cursor: pointer;
 filter: brightness(1.1);
 }
-.watchlist-button:active {
+.action-movie-button:active {
 filter:brightness(1.2)
 }
-.watchlist-span {
+.action-movie-span {
   display: block;
   width: max-content;
   position: relative;
@@ -632,7 +662,7 @@ filter:brightness(1.2)
   width: 100%;
   float: right;
 }
-@media (min-width: 448px) {
+@media (min-width: 500px) {
   .preview-image {
     width: 50%;
     float: right;
@@ -645,14 +675,14 @@ filter:brightness(1.2)
     width: fit-content;
     padding-right: 30px;
   }
-  .watchlist-wrapper {
+  .action-movie-wrapper {
     position: relative;
     margin-left: 1em;
   }
-  .watchlist-wrapper:hover > .watchlist-span {
+  .action-movie-wrapper:hover > .action-movie-span {
     display: block;
   }
-  .watchlist-span {
+  .action-movie-span {
     position: absolute;
     top: 0;
     display: none;
@@ -668,7 +698,7 @@ filter:brightness(1.2)
     -webkit-box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.65); 
     box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.65);
   }
-  .watchlist-span::before {
+  .action-movie-span::before {
     content:"\A";
     width: 0;
     height: 0;
@@ -998,6 +1028,8 @@ filter:brightness(1.2)
 /*PANEL DE CONTROL*/
 .miniature-input {
   max-width: 405px;
+  width: available;
+  width: -moz-available;
   margin-bottom: 20px;
   position: relative;
 }
@@ -1005,7 +1037,7 @@ filter:brightness(1.2)
   width: 100%;
   border: 1px solid #00B8CC;
   border-radius: 5px;
-  width: 405px;
+  max-width: 405px;
   height: 202px;
   object-fit: cover;
 }
@@ -1015,7 +1047,7 @@ filter:brightness(1.2)
 #add-movie-form {
   padding-bottom: 5em;
   position: relative;
-  width: fit-content;
+  /* width: fit-content; */
   margin: 0 auto;
 }
 .input-video {
@@ -1034,6 +1066,9 @@ filter:brightness(1.2)
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+.cancel {
+  background-color: #324b4f !important;
 }
 @media (min-width: 1000px) {
   .miniature-input {
@@ -1070,3 +1105,12 @@ filter:brightness(1.2)
   object-fit: cover;
 
 }*/
+
+/* List movie */
+.movie-thumbnail {
+  height: 50px;
+  width: 70px;
+  object-fit: cover;
+  vertical-align: middle;
+  border-radius: 5px 0 0 5px;
+}

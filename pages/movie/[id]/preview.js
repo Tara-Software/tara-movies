@@ -50,6 +50,9 @@ export default function Movie({ user, movie, data}) {
         
         return data.director ? <Link href={{ pathname: '/browse', query: {directorId: data.director.id}}}><a><span className="link-to-browse">{data.director.name}</span></a></Link> : ""
     }
+    const shareThis = (movie) => {
+        alert(movie)
+      }
     return (
         <>
         <Head>
@@ -75,26 +78,34 @@ export default function Movie({ user, movie, data}) {
                                 </div>
                             </div>
                         </Link>
-                        {inWatchlist && 
-                        <>
-                        <div className="watchlist-wrapper">
-                            <div onClick={removeWatchList} className="watchlist-button">
-                                <img width="50" height="50" src="/images/icons/close-outline-white.svg"></img>
+                        <div className="secondary-actions">
+                            {inWatchlist && 
+                            <>
+                            <div className="action-movie-wrapper">
+                                <div onClick={removeWatchList} className="action-movie-button">
+                                    <img width="50" height="50" src="/images/icons/close-outline-white.svg"></img>
+                                </div>
+                                <span className="action-movie-span"><b>Quitar de la lista</b></span>  
                             </div>
-                            <span className="watchlist-span">Quitar de la lista</span>  
-                        </div>
-                        </>
-                        }
-                        {!inWatchlist && 
-                        <>
-                        <div className="watchlist-wrapper">
-                            <div onClick={addToWatchList} className="watchlist-button">
-                                <img width="50" height="50" src="/images/icons/add-outline-white.svg"></img>
+                            </>
+                            }
+                            {!inWatchlist && 
+                            <>
+                            <div className="action-movie-wrapper">
+                                <div onClick={addToWatchList} className="action-movie-button">
+                                    <img width="50" height="50" src="/images/icons/add-outline-white.svg"></img>
+                                </div>
+                                <span className="action-movie-span"><b>Añadir a la lista</b></span>  
                             </div>
-                            <span className="watchlist-span">Añadir a la lista</span>  
+                            </>
+                            }
+                            <div className="action-movie-wrapper">
+                                <div className="action-movie-button" onClick={() => shareThis(window.location)}>
+                                    <img width="40" height="40" src="/images/icons/share-social-outline-white.svg"></img>
+                                </div>
+                                <span className="action-movie-span"><b>Compartir</b></span>
+                            </div>
                         </div>
-                        </>
-                        }
                     </div>
                 
                     <p className="data-description">{data.description || "Erase una vez en un reino muy muy lejano..."}</p>

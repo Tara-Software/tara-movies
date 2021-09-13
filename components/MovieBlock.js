@@ -38,6 +38,9 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
     var closest = over.closest('.movies')
     closest.classList.remove("hovering")
   }
+  const shareThis = (movie) => {
+    alert(`${process.env.NEXT_PUBLIC_API_URL}${movie}`)
+  }
     return (
         <li className="movie-item" onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
           <div className="movie-item-thumbnail">
@@ -71,8 +74,13 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
                   <div className="movie-item-add-watchlist-hover"><b>Quitar de la lista</b></div>  
                   </>
                 }
-              </div>
-            </div>
+                </div>
+                <div className="movie-item-add-watchlist" onClick={() => shareThis(url_preview)}>
+                    <img src="/images/icons/share-social-outline-white.svg"></img>
+                    <span className="movie-item-add-watchlist-hover"><b>Compartir</b></span>
+                  </div>
+                </div>
+            
             <div className="movie-item-data padding">
               <span className="movie-item-title">{title}</span>
               <span className="movie-item-description">{description_short}</span>

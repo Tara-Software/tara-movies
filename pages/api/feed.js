@@ -71,7 +71,7 @@ export default async function handle(req, res) {
     }); // promise
     return res.json({id: movie.id})
 }
-const getGenres = async genres_list => {
+export const getGenres = async genres_list => {
     const res = []
     const list = genres_list.split(",")
     for(let genre of list) {
@@ -98,10 +98,11 @@ const getGenres = async genres_list => {
     }
     return res;
 }
-const saveFile = async (file, id) => {
+export const saveFile = async (file, id) => {
     if (file === undefined) {
         return;
     }
+    console.log(file.path)
     const data = fs.readFileSync(file.path);
     fs.writeFileSync(`./public/images/${id}`, data);
     await fs.unlinkSync(file.path)
