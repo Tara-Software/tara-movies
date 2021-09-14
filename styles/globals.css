@@ -528,6 +528,7 @@ width: 405px;
   .scroll-movies {
     scrollbar-width: none;
     overflow-x: scroll;
+    overflow-y: hidden;
   }
   .mobile-scroll {
     display: block;
