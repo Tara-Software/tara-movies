@@ -1,12 +1,13 @@
+import { Console } from 'console';
 import prisma from '../../../lib/prisma';
-
+import {PythonShell} from 'python-shell';
 // const prisma = new PrismaClient()
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return email != undefined && re.test(email);
 }
 function validateUsername(username) {
-    var re = /^[a-z]+$/; 
+    var re = /^[a-zA-z]+$/; 
     return username != undefined && re.test(username) && username.length <= 15
 }
 export default async function handle(req, res) {
@@ -42,7 +43,24 @@ export default async function handle(req, res) {
                 name: user.name,
                 email: user.email,
                 password: user.password,
-                avatar: "/images/avatar/default.png"
+            }
+        });
+        
+        // Código para generar una imagen 
+        var id = result.id
+       
+        PythonShell.run('lib/main.py', {args: [id+".png"]}, function(err, results) {
+            if(err) console.log(err)
+            console.log(results)
+            console.log('finished');
+        })
+
+        await prisma.user.update({
+            where: {
+                id: id
+            },
+            data: {
+                avatar: `/images/avatar/${id}.png`
             }
         });
         return res.status(200).json(result)
