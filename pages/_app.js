@@ -3,7 +3,7 @@ import NextNProgress from 'nextjs-progressbar';
 import '../styles/globals.css';
 
 class MyApp extends App {
-  render() {
+    render() {
     const { Component, pageProps } = this.props;
 
     return(

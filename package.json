@@ -20,6 +20,7 @@
     "crypto-js": "^4.1.1",
     "formidable": "^1.2.2",
     "http-proxy": "^1.18.1",
+    "landys": "^1.0.8",
     "mime": "^2.5.2",
     "multer": "^1.4.3",
     "multiparty": "^4.2.2",

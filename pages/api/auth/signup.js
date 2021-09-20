@@ -1,6 +1,6 @@
-import { Console } from 'console';
 import prisma from '../../../lib/prisma';
-import {PythonShell} from 'python-shell';
+const landys = require('landys')
+
 // const prisma = new PrismaClient()
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
@@ -48,13 +48,9 @@ export default async function handle(req, res) {
         
         // Código para generar una imagen 
         var id = result.id
-       
-        PythonShell.run('lib/main.py', {args: [id+".png"]}, function(err, results) {
-            if(err) console.log(err)
-            console.log(results)
-            console.log('finished');
-        })
+        const response = landys.generateAvatar("public/images/avatar", `${id}.png`)
 
+       
         await prisma.user.update({
             where: {
                 id: id
