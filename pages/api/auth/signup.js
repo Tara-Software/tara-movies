@@ -48,17 +48,15 @@ export default async function handle(req, res) {
         
         // Código para generar una imagen 
         var id = result.id
-        const response = landys.generateAvatar("public/images/avatar", `${id}.png`)
-
-       
-        await prisma.user.update({
-            where: {
-                id: id
-            },
-            data: {
-                avatar: `/images/avatar/${id}.png`
+        console.log("eiei")
+        const response = await fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/upavatar`, {
+            method: 'POST',
+            body: JSON.stringify({id:id}),
+            headers: {
+                'Content-Type': 'application/json'
             }
         });
+        
         return res.status(200).json(result)
     } catch(error) {
         console.error(error)

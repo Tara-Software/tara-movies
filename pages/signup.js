@@ -22,27 +22,22 @@ export default function Signup() {
             method: 'POST',
             body: JSON.stringify({name: username, email: email, password: hashed_password})
         });
-        console.log(response)
         if(response && response.status == 401 || response.status == 500) {
             var error_json = await response.json();
             document.getElementById("error").innerText = error_json.error;
             document.getElementById("error").classList.add("tara-error-show")
         } else {
             const res = await response.json()
-
-            // Creamos una nueva sesión para el usuario maldito
             
+            // Creamos una nueva sesión para el usuario maldito           
             const session_response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify({email:res.email, password:res.password})
             })
-
             if(session_response.ok) {
                 router.push("/browse")
             }
-
-        }
-               
+        }  
     }
     const outFocus = (e) => {
         var label = document.getElementById(e.target.id + "-label")
@@ -54,11 +49,9 @@ export default function Signup() {
         var label = document.getElementById(e.target.id + "-label")
         label.classList.add("set")
     }
-
     return (
         <>
-        <Navigation username="" />
-        
+        <Navigation username="" />   
         <div className="container">
             <div className="form-container center">
                 <h1 >Regístrate</h1>
@@ -90,7 +83,8 @@ export default function Signup() {
                     </div>
                     <button className="submit-form tara-button">Continuar</button>
                 </form>
-        </div></div>
+            </div>
+        </div>
         </>
     )
 }
