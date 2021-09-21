@@ -24,7 +24,7 @@ export default function Signup() {
         e.preventDefault()
         
         const hashed_password = hash_password(password);
-        const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`, {
+        const response = await fetch(`/api/auth/signup`, {
             method: 'POST',
             body: JSON.stringify({name: username, email: email, password: hashed_password})
         });
@@ -56,7 +56,8 @@ export default function Signup() {
         label.classList.add("set")
     }
     return (
-        <>vercel.app/undefined/api/
+        <>
+        <Navigation username="" />   
         <div className="container">
             <div className="welcome-mask">
                 <svg  className="shape shape-top-left" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
