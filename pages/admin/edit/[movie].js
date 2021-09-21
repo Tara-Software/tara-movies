@@ -26,7 +26,7 @@ export default function Edit(props) {
         body.append("director", director);
         body.append("genres", genres);
 
-        const response = await fetch(`${process.env.NETX_PUBLIC_VERCEL_URL}/api/movie/update`,{
+        const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movie/update`,{
             method: 'POST',
             body
         });

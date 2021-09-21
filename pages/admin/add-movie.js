@@ -26,7 +26,7 @@ export default function AdminPanel(props) {
         body.append("director", director);
         body.append("genres", genres);
 
-        const res = await fetch(`${process.env.NETX_PUBLIC_VERCEL_URL}/api/feed`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/feed`,{
             method: 'POST',
             body
         });
@@ -43,7 +43,7 @@ export default function AdminPanel(props) {
             const video_form = new FormData();
             video_form.append("video", video, id + '.mp4');
             try {    
-                var response = await fetch(`${process.env.NETX_PUBLIC_VERCEL_URL}/api/video_to_server`, {
+                var response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/video_to_server`, {
                     body: video_form,
                     method: 'POST'
                 });

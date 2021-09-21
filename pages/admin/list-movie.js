@@ -6,7 +6,7 @@ import { getUserAuth } from "../../lib/auth"
 
 export default function AdminPanel(props) {
     const deleteMovie = async (id) => {
-        const res = await fetch(`${process.env.NETX_PUBLIC_VERCEL_URL}/api/movie/delete`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movie/delete`, {
             method: 'POST',
             body: JSON.stringify({id: id})
         });

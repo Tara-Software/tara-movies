@@ -24,7 +24,7 @@ export default function Signup() {
         e.preventDefault()
         
         const hashed_password = hash_password(password);
-        const response = await fetch(`${process.env.NETX_PUBLIC_VERCEL_URL}/api/auth/signup`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/signup`, {
             method: 'POST',
             body: JSON.stringify({name: username, email: email, password: hashed_password})
         });
@@ -36,7 +36,7 @@ export default function Signup() {
             const res = await response.json()
             
             // Creamos una nueva sesión para el usuario maldito           
-            const session_response = await fetch(`${process.env.NETX_PUBLIC_VERCEL_URL}/api/auth/login`, {
+            const session_response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify({email:res.email, password:res.password})
             })
@@ -56,8 +56,7 @@ export default function Signup() {
         label.classList.add("set")
     }
     return (
-        <>
-        <Navigation username="" />   
+        <>vercel.app/undefined/api/
         <div className="container">
             <div className="welcome-mask">
                 <svg  className="shape shape-top-left" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
