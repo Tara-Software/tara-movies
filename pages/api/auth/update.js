@@ -1,5 +1,6 @@
 import formidable from "formidable";
 import fs from 'fs';
+import cors, { runMiddleWare } from "../../../lib/middleware";
 import prisma from '../../../lib/prisma';
 
 // const prisma = new PrismaClient()
@@ -11,6 +12,8 @@ export const config = {
 }
 
 export default async function handle(req, res) {
+    await runMiddleWare(req, res, cors);
+
     const form = formidable.IncomingForm();
     form.parse(req, async function(err, fields, files) {
         let imageName = "default.png";

@@ -1,6 +1,7 @@
 import fs from 'fs'
 import formidable from "formidable";
 import prisma from '../../lib/prisma';
+import cors, { runMiddleWare } from '../../lib/middleware';
 
 // const prisma = new PrismaClient()
 
@@ -10,6 +11,8 @@ export const config = {
     }
 }
 export default async function handle(req, res) {
+    await runMiddleWare(req, res, cors);
+
 
     const form = formidable.IncomingForm();
     

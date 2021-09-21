@@ -1,6 +1,7 @@
 import prisma from "../../../lib/prisma";
 import formidable from "formidable";
 import { getGenres, saveFile } from "../feed";
+import cors, { runMiddleWare } from "../../../lib/middleware";
 
 export const config = {
     api: {
@@ -8,6 +9,8 @@ export const config = {
     }
 }
 export default async function handle(req, res) {
+    await runMiddleWare(req, res, cors);
+
     if(req.method == 'POST') {
         var id;
         const form = formidable.IncomingForm();

@@ -1,3 +1,5 @@
+import cors, { runMiddleWare } from "../../lib/middleware"
+
 var path = require("path")
 var os = require("os")
 var fs = require("fs")
@@ -13,6 +15,8 @@ export const config = {
 // const handler = nc().use(cors()).post(async (req, res) => {
 
 export default async function handle(req, res) {
+    await runMiddleWare(req, res, cors);
+
 
     if (req.method === 'POST') {
         var form = new multiparty.Form()

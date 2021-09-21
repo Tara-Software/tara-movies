@@ -1,4 +1,6 @@
 import prisma from '../../../lib/prisma';
+import cors, { runMiddleWare } from '../../../lib/middleware'
+
 // const prisma = new PrismaClient()
 
 function validateEmail(email) {
@@ -10,6 +12,9 @@ function validateUsername(username) {
     return username != undefined && re.test(username) && username.length <= 15
 }
 export default async function handle(req, res) {
+    
+    await runMiddleWare(req, res, cors);
+
     const user = JSON.parse(req.body);
     if(!validateEmail(user.email)) {
         return res.status(401).json({error: "Email incorrecto."});

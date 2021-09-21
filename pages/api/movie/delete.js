@@ -1,6 +1,8 @@
+import cors, { runMiddleWare } from '../../../lib/middleware';
 import prisma from '../../../lib/prisma';
 
 export default async function handle(req, res) {
+    await runMiddleWare(req, res, cors);
     if(req.method == 'POST') {
         const { id } = JSON.parse(req.body)
         try {

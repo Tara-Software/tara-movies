@@ -1,11 +1,14 @@
 import { PrismaClient } from '@prisma/client'
 import { SHA256 } from 'crypto-js'
 import nookies from 'nookies'
+import cors, { runMiddleWare } from '../../../lib/middleware';
 import prisma from '../../../lib/prisma';
 
 // const prisma = new PrismaClient()
 
 export default async function handle(req, res) {
+    await runMiddleWare(req, res, cors);
+
 
     const {email, password} = JSON.parse(req.body)
     const exists = await prisma.user.findUnique({
