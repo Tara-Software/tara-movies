@@ -36,7 +36,7 @@ export default function Signup() {
             const res = await response.json()
             
             // Creamos una nueva sesión para el usuario maldito           
-            const session_response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/login`, {
+            const session_response = await fetch(`/api/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify({email:res.email, password:res.password})
             })
