@@ -27,7 +27,7 @@ export default function Index() {
                         <div className="welcome-navigation-text">
                             {/* <div className="welcome-navigation-img"><img width="64" height="64" src="/tara-software.svg" /></div> */}
                             <span>Welcome to</span>
-                            <div className="tara-movies-wrapper"><img src="tara-movies-text.svg"></img></div>
+                            <div className="tara-movies-wrapper"><img src="/images/tara-movies-text.svg"></img></div>
                             <span className="welcome-subtitle">Donde seguramente todas las películas sean de Barbie.</span>
                         </div>
                     </div>

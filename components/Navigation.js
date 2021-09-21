@@ -67,9 +67,9 @@ export default function Navigation(props) {
                         <div className={styles.index_url}>
                             <div className={styles.image_icon}>
                                 
-                            <Link href={index_URL}><img className={styles.tara_icon} src="/tara-software-logo-alt.svg" /></Link>
+                            <Link href={index_URL}><img className={styles.tara_icon} src="/images/tara-software-logo-alt.svg" /></Link>
                             </div>
-                            <span className={styles.image_text}><Link href="/"><img src="/tara-movies-text.svg" /></Link></span>
+                            <span className={styles.image_text}><Link href="/"><img src="/images/tara-movies-text.svg" /></Link></span>
 
                         </div>
                 </div>
