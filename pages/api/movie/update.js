@@ -54,7 +54,7 @@ export default async function handle(req, res) {
                             id: fields.id
                         },
                         data: {
-                            thumbnail: `${process.env.NEXT_PUBLIC_VIDEOS_URL}/videos/thumb/${fields.id}`
+                            thumbnail: `/videos/thumb/${fields.id}`
                         }
                     })
                     id = add_thumb.id

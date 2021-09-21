@@ -38,7 +38,7 @@ export default function Edit(props) {
             if(thumbnail) {
                 const form = new FormData();
                 form.append("file", thumbnail, data.id + '.png');
-                fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/newmoviethumbnail`, {
+                fetch(`/newmoviethumbnail`, {
                 method: 'POST',
                 body: form
             })

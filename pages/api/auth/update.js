@@ -23,7 +23,7 @@ export default async function handle(req, res) {
             },
             data: {
                 name: fields.username,
-                avatar: `${process.env.NEXT_PUBLIC_VIDEOS_URL}/avatar/${fields.id}`
+                avatar: `/avatar/${fields.id}`
             }
         })
         if(user) {

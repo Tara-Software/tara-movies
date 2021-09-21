@@ -31,7 +31,7 @@ export default function ControlPanel({user, params}) {
                 // Subir avatar al otro servidor
                 const form = new FormData()
                 form.append('file', avatar, data.id + ".png");
-                fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/newavatar`, {
+                fetch(`/newavatar`, {
                     method: 'POST', 
                     body: form
                 });
