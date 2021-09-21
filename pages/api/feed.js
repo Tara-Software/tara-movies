@@ -56,7 +56,7 @@ export default async function handle(req, res) {
                     id: prisma_response.id
                 },
                 data: {
-                    thumbnail: "/images/" + thumbnail
+                    thumbnail: `${process.env.NEXT_PUBLIC_VIDEOS_URL}/moviethumbnail/${prisma_response.id}`
                 }
             })
             await saveFile(files.thumbnail, thumbnail)

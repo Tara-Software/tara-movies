@@ -23,12 +23,12 @@ export default async function handle(req, res) {
             },
             data: {
                 name: fields.username,
-                avatar: `/images/avatar/${imageName}`
+                avatar: `${process.env.NEXT_PUBLIC_VIDEOS_URL}/avatar/${fields.id}`
             }
         })
         if(user) {
-            await saveFile(files.file, imageName);
-            return res.status(200).send({username: fields.username});
+            // await saveFile(files.file, imageName);
+            return res.status(200).json({id: user.id});
         }
     });
 

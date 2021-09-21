@@ -8,14 +8,15 @@ export default function Navigation(props) {
     const settings_URL = (props.username ? "/" + props.username + "/settings" : "#")
     const index_URL = (props.username ? "/browse" : "/")
     const watchlist_URL = (props.username ? "/" + props.username + "/watchlist" : "#")
-    const image = (props.avatar ? props.avatar : "/images/avatar.default.png")
+    const image = (props.avatar ? props.avatar : "/images/default.png")
 
     useEffect(() => {
         // Close the dropdown menu if the user clicks outside of it
         window.onclick = function(event) {
-            if(!event.target.className.includes("dd_")) {
+            if(event.target.localName == "path" || !event.target.className.includes("dd_")) {
                 var dd = document.getElementById("dd")
                 if(dd != null) dd.classList.remove("show")
+                if(document.getElementById("global-mask") != null) document.getElementById("global-mask").classList.remove("mask")
                 var arrow = document.querySelector(".arrow")
                 if(arrow) {
                     arrow.classList.remove("rotation")
@@ -30,6 +31,7 @@ export default function Navigation(props) {
     })
     const exitMenu = () => {
         document.getElementById("dd").classList.remove("show")
+        document.getElementById("global-mask").classList.remove("mask")
         if (window.matchMedia("(max-width: 450px)").matches) {
             /* La pantalla tiene menos de 450 píxeles de ancho */
             document.documentElement.style.overflowY = "initial"
@@ -45,9 +47,11 @@ export default function Navigation(props) {
             arrow.classList.add("rotation")
         }
         if (window.matchMedia("(max-width: 450px)").matches) {
-            /* La pantalla tiene menos de 450 píxeles de ancho */
+            /* La pantalla tiene menos de 450 píxeles de ancho */        
+            document.getElementById("global-mask").classList.add("mask")
             document.documentElement.style.overflowY = "hidden"
             document.body.style.overflowY = "hidden"
+
         } 
 
     }
@@ -56,16 +60,18 @@ export default function Navigation(props) {
     
     return (
         <nav className={styles.web_nav}>
+            <div id="global-mask" />
             <div className={styles.left}>
                 <div className={styles.middle}>
-                    <Link href={index_URL}>
+                    
                         <div className={styles.index_url}>
                             <div className={styles.image_icon}>
-                                <img className={styles.tara_icon} src="/tara-software.svg" />
+                                
+                            <Link href={index_URL}><img className={styles.tara_icon} src="/tara-software-logo-alt.svg" /></Link>
                             </div>
-                            <span className={styles.image_text}>Tara Movies</span>
+                            <span className={styles.image_text}><Link href="/"><img src="/tara-movies-text.svg" /></Link></span>
+
                         </div>
-                    </Link>
                 </div>
             </div>
             <div className={styles.right}>
@@ -84,7 +90,7 @@ export default function Navigation(props) {
                         <div className={styles.dd_content} id="dd">
                             <div className={styles.dd_info}>
                                 <span className={styles.dd_title}>Opciones</span>
-                                <div className={styles.dd_close} onClick={exitMenu}><img src="/images/icons/close-outline-white.svg" /></div>
+                                <div className={styles.dd_close} onClick={exitMenu}><img src="/images/icons/close-outline.svg" /></div>
                             </div>
                             <Link href={user_URL}><div className={styles.dd_item}>{props.username}</div></Link>
                             <div className={styles.divider}></div>

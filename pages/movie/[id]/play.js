@@ -6,6 +6,7 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Head from 'next/head'
 import ProgressBar from '../../../components/ProgressBar'
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Movie({ user, movie, data}) {
     const [ playing   , setPlaying ]    = useState(false)
@@ -19,7 +20,8 @@ export default function Movie({ user, movie, data}) {
     const handleFullSreen = useFullScreenHandle();
     const [ opacityHandled, setOpacityHandled ] = useState(false)
     const player = useRef(null)
-
+    const router = useRouter();
+    const preview_url = router.asPath.replace("/play", "/preview");
     
 
 
@@ -28,6 +30,7 @@ export default function Movie({ user, movie, data}) {
         const volume = window.localStorage.getItem("volume")
         setVolume(volume || 1)
     }, [])
+    
     const reportChange = (e) => {
         var fc_icon = document.getElementsByClassName("fullscreen-icon")[0]
         if(e) {
@@ -75,24 +78,7 @@ export default function Movie({ user, movie, data}) {
         
     }
     const handlePause = () => {
-        var pauseButton = document.getElementById("pause-button");
-        var play_pause = document.getElementsByClassName("play-pause")[0]
-
         setPlaying(!playing);
-        if(playing) {
-            pauseButton.classList.add("pause-button-play")
-            pauseButton.classList.remove("pause-button-pause")
-            play_pause.classList.remove("pause-bg-button")
-            play_pause.classList.add("play-bg-button")
-
-        }
-        else {
-            pauseButton.classList.remove("pause-button-play")
-            pauseButton.classList.add("pause-button-pause")
-            play_pause.classList.remove("play-bg-button")
-            play_pause.classList.add("pause-bg-button")
-            
-        }
     }
     const handleMute = () => {
         var volume_icon = document.getElementsByClassName("volume-icon")[0];
@@ -182,7 +168,7 @@ export default function Movie({ user, movie, data}) {
                 <div className="player-wrapper" id="playerWrapper" >
                     <FullScreen handle={handleFullSreen} onChange={reportChange}>
                         <span id="mask"></span>
-                        <Link href={document.URL.replace("/play", "/preview")}><button id="go-back" className="opacable"></button></Link>
+                        <Link href={preview_url}><button id="go-back" className="opacable"></button></Link>
 
                         <div className="video-wrapper">
                             <ReactPlayer 
@@ -198,7 +184,8 @@ export default function Movie({ user, movie, data}) {
                             />    
                             <div className="over-video-controls opacable">
                                 <button id="rewind" onClick={handleRewind}></button>
-                                <button id="pause-button" className="pause-button pause-button-play" onClick={handlePause}></button>
+                                {/* <button id="pause-button" className="pause-button pause-button-play" onClick={handlePause}></button> */}
+                                <div id="pause-button" className="reproducir-img" onClick={handlePause}><img width="auto" height="30" src={playing ? "/images/icons/pause-white.svg" : "/images/icons/play-white.svg"} /></div>
                                 <button id="forward" onClick={handleForward}></button>
                             </div>
                         </div>

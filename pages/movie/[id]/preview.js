@@ -20,7 +20,9 @@ export default function Movie({ user, movie, data}) {
         })
         setInWatchlist(true)
     }
-
+    const handleWatchlist = (e) => {
+        inWatchlist ? removeWatchList(e) : addToWatchList(e)
+    }
     const removeWatchList = async (e) => {
         const removed = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/movie/removewatchlist`, {
         method: 'POST',
@@ -61,62 +63,52 @@ export default function Movie({ user, movie, data}) {
         </Head>
         <Navigation username={user.name} avatar={user.avatar} />
         <main className="main preview-main" style={{width: '100%'}}>
+            <div className="relative-wrapper">
                 <div className="preview-image-wrapper">
-                    <div className="preview-image"><img src={data.thumbnail}/></div>
+                    <Link href={`/movie/${data.id}/play`} >
+                            <div className="reproducir-wrapper ">
+                                <div className="reproducir-content">
+                                <div className="reproducir-img"><img width="30" height="30" src="/images/icons/play-white.svg" /></div>
+                                </div>
+                            </div>
+                    </Link>
+                    <div className="preview-image mask"><img src={data.thumbnail}/></div>
                 </div>
                 <div className="preview-wrapper padding">
-                    <h1 id="movie-title">{data.title}</h1>
-                    {/* <div className="movie-resumen">
-                        <span>IMDB 6,6 2 h 9 min 2020 X-Ray HDR UHD 13</span>
-                    </div> */}
-                    <div className="movie-actions-wrapper">
-                        <Link href={`/movie/${data.id}/play`} >
-                            <div className="reproducir-wrapper tara-button">
-                                <div className="reproducir-content">
-                                <div className="reproducir-img"><img width="60" height="auto" src="/images/icons/play-circle-fill.svg" /></div>
-                                <span className="reproducir-text">Reproducir película</span>
+                    <div className="title-actions-wrapper">
+                        <span id="movie-title">{data.title}</span>
+                        <div className="movie-actions-wrapper">
+                            <div className="secondary-actions">
+                                <div className="action-movie-wrapper">
+                                    <div onClick={handleWatchlist} className={inWatchlist ? "action-movie-button rotate" : "action-movie-button"}>
+                                        <img width="30" height="30" src="/images/icons/add-circle-outline-white.svg" alt={inWatchlist ? "Quitar de la lista" : "Añadir a la lista"} title={inWatchlist ? "Quitar de la lista" : "Añadir a la lista"}></img>
+                                    </div>
+
                                 </div>
-                            </div>
-                        </Link>
-                        <div className="secondary-actions">
-                            {inWatchlist && 
-                            <>
-                            <div className="action-movie-wrapper">
-                                <div onClick={removeWatchList} className="action-movie-button">
-                                    <img width="50" height="50" src="/images/icons/close-outline-white.svg"></img>
-                                </div>
-                                <span className="action-movie-span"><b>Quitar de la lista</b></span>  
-                            </div>
-                            </>
-                            }
-                            {!inWatchlist && 
-                            <>
-                            <div className="action-movie-wrapper">
-                                <div onClick={addToWatchList} className="action-movie-button">
-                                    <img width="50" height="50" src="/images/icons/add-outline-white.svg"></img>
-                                </div>
-                                <span className="action-movie-span"><b>Añadir a la lista</b></span>  
-                            </div>
-                            </>
-                            }
-                            <div className="action-movie-wrapper">
-                                <div className="action-movie-button" onClick={() => shareThis(window.location)}>
-                                    <img width="40" height="40" src="/images/icons/share-social-outline-white.svg"></img>
-                                </div>
-                                <span className="action-movie-span"><b>Compartir</b></span>
+                                {/* <div className="action-movie-wrapper">
+                                    <div className="action-movie-button" onClick={() => shareThis(window.location)}>
+                                        <img width="30" height="30" src="/images/icons/share-social-outline-white.svg"></img>
+                                    </div>
+                                    <span className="action-movie-span"><b>Compartir</b></span>
+                                </div> */}
                             </div>
                         </div>
                     </div>
                 
-                    <p className="data-description">{data.description || "Erase una vez en un reino muy muy lejano..."}</p>
                     <div className="movie-data-list">
-                        <span className="movie-data-list-item">Dirección: <span className="movie-data-list-value">{parseDirector()}</span></span>
-                        <span className="movie-data-list-item">Reparto</span>
-                        <span className="movie-data-list-item">Géneros: <span className="movie-data-list-value">{parseGenre()}</span></span>
+                        <span className="movie-data-list-item">Dirigida por: <span className="movie-data-list-value">{parseDirector()}</span></span>
+                        {/* <span className="movie-data-list-item">R:</span> */}
+                        <span className="movie-data-list-item genres"><span className="movie-data-list-value">{parseGenre()}</span></span>
                         <span className="movie-data-list-item">Subtítulos</span>
                         <span className="movie-data-list-item">Idiomas de audios</span>
                     </div>
                 </div>
+            </div> 
+            <div className="movie-description">
+                <span className="movie-description-title">Resumen</span>
+                <p className="data-description">{data.description || "Erase una vez en un reino muy muy lejano..."}</p>
+            </div>
+
         </main>
         </>
     )

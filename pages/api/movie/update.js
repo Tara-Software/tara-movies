@@ -9,6 +9,7 @@ export const config = {
 }
 export default async function handle(req, res) {
     if(req.method == 'POST') {
+        var id;
         const form = formidable.IncomingForm();
         var movie = await new Promise(function(resolve, reject) {
             form.parse(req, async function(err, fields, files) {
@@ -47,15 +48,16 @@ export default async function handle(req, res) {
                     if(files.thumbnail !== undefined) {
                         thumbnail = fields.id + files.thumbnail.name.split(".")[1]
                     }
+                    console.log(thumbnail)
                     const add_thumb = await prisma.movie.update({
                         where: {
                             id: fields.id
                         },
                         data: {
-                            thumbnail: "/images/" + thumbnail
+                            thumbnail: `${process.env.NEXT_PUBLIC_VIDEOS_URL}/videos/thumb/${fields.id}`
                         }
                     })
-                    await saveFile(files.thumbnail, thumbnail)
+                    id = add_thumb.id
                     resolve()
                 }
                 catch(error) {
@@ -65,6 +67,6 @@ export default async function handle(req, res) {
                 }
             }); // Parse
         }); // Promise
-        return res.status(200).json({})
+        return res.status(200).json({id:id})
     }
 }

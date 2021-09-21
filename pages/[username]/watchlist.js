@@ -27,10 +27,10 @@ export default function Watchlist({user, params}) {
             </div>
         {
             user.watchlists.map(({movie}, index) => {
-                return ( <li key={index} id={`item_${movie.id}`} style={{position:"relative",marginLeft :"5%",marginRight:"5%", display: "flex", alignItems: "center", backgroundColor:"#003c52", margin: "10px 0", borderRadius:"5px"}}>
+                return ( <li key={index} id={`item_${movie.id}`} style={{position:"relative",marginLeft :"5%",marginRight:"5%", display: "flex", alignItems: "center", border:" 1px solid var(--fg-color)", margin: "10px 0", borderRadius:"5px"}}>
                 <div style={{display: "inline-block", }}><img className="movie-thumbnail" src={movie.thumbnail}></img></div>
                 <Link href={`/movie/${movie.id}/preview`}><a><span style={{marginLeft: "10px"}}>{movie.title}</span></a></Link>
-                <span onClick={(e) => removeWatchList(e, movie.id)} style={{cursor: "pointer",position:"absolute", right:"1em"}}><img height="30" width="30" style={{verticalAlign: "middle"}} src="/images/icons/close-outline-white.svg"></img></span>
+                <span onClick={(e) => removeWatchList(e, movie.id)} style={{cursor: "pointer",position:"absolute", right:"1em"}}><img height="30" width="30" style={{verticalAlign: "middle"}} src="/images/icons/close-outline.svg"></img></span>
 
             </li>)
             })

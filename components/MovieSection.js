@@ -69,7 +69,7 @@ export default function MovieSection(props) {
           <div className="ul-header">
               <h3 className="ul-label">{props.header}</h3>
           </div>
-          <div style={{display: showSlider ? "block": "none"}}className="mobile-scroll backwards" onClick={scrollBackwards}><img src="/images/icons/chevron-forward-white.svg"></img></div>
+          <div style={{display: showSlider ? "block": "none"}} className="mobile-scroll backwards" onClick={scrollBackwards}><img src="/images/icons/chevron-forward-white.svg"></img></div>
           <ul className="no-padding scroll-movies">
             {!restriction && <>
             {props.movies.map(({id, title, description, thumbnail}) => {

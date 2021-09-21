@@ -2,7 +2,7 @@ import Head from "next/head"
 import router from "next/router"
 import { useState } from "react"
 import Navigation from "../../components/Navigation"
-import { getUserAuthorization } from "../../lib/auth"
+import { getUserAuth } from "../../lib/auth"
 import { getAllGenres, getAllDirectors } from '../../lib/movies'
 
 export default function AdminPanel(props) {
@@ -102,12 +102,12 @@ export default function AdminPanel(props) {
         <main className="padding">
             
             <form onSubmit={feedDB} id="add-movie-form">
-            <div style={{fontSize: "1.4em", color:"white", fontWeight: "bold", margin: "30px 0"}} className="w400">Elegir película para ir tirando</div>
+            <div style={{fontSize: "1.4em", fontWeight: "bold", margin: "30px 0"}} className="w400">Elegir película para ir tirando</div>
                 <div className="tara-error w400" id="error-success"></div>
                 <div className="input-wrapper w400">
                     <div className="input-wrapper-relative input-video-wrapper">
                         <label htmlFor="file" id="file-label">
-                            <img src="/images/icons/claqueta.svg" className="input-video"/>
+                            <img src="/images/icons/claqueta.svg" style={{filter:"invert(1)"}} className="input-video"/>
                             <span>{filename ? filename : "No se ha seleccionado ningún archivo."}</span>
                         </label>
                     </div>
@@ -158,7 +158,7 @@ export default function AdminPanel(props) {
                 <div className="miniature-input">
                     <div className="miniature-input-wrapper">
                         <span style={{display: "block", marginBottom: "10px"}}>Añadir miniatura</span>
-                        <label htmlFor="upload_miniature" className="tara-button transparent"><img className="miniature-input-img" src={createObjectURL ? createObjectURL : "/images/default.jpg"} /></label>
+                        <label htmlFor="upload_miniature" className="tara-button transparent"><img className="miniature-input-img" src={createObjectURL ? createObjectURL : "/images/default.png"} /></label>
                         <input className="miniature-input hide" type="file" id="upload_miniature" onChange={uploadToClient}/>
                     </div>
                 </div>
@@ -173,8 +173,23 @@ export default function AdminPanel(props) {
 }
 
 export async function getServerSideProps(ctx) {
+    const isAuthenticated = await getUserAuth(ctx);
+    if(!isAuthenticated) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false
+            }
+        }
+    } else if(isAuthenticated.isAdmin <= 0) {
+        return {
+            redirect: {
+                destination: "/browse",
+                permanent: false
+            }
+        }
+    }
     const genres = await getAllGenres();
     const directors = await getAllDirectors(); 
-
     return { props: {genres, directors}}
 }

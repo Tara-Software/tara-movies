@@ -3,24 +3,20 @@
     padding: 0 5%;
     position: relative;
     z-index: 999;
+    display: flex;
+    background-color: var(--main-bg-color);
+    border-bottom: 1px solid #e4e4e4;
 }
-.web_nav::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: black;
-    opacity: 0.4;
-}
+
 .index_url {
-    cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 .image_icon {
     width: 32px;
     height: 64px;
     display: inline-block;
+    cursor: pointer;
 }
 .tara_icon {
     width: 100%;
@@ -30,13 +26,21 @@
 .image_text {
     vertical-align: middle;
     margin-left: 10px;
-    color: white
+    flex: 1;
+}
+.image_text img {
+    width: 70%;
+    height: 64px;
+    max-width: 170px;
+    cursor: pointer;
+
 }
 .left {
     display: inline-block;
     height: 100%;
     z-index: 999;
     position: relative;
+    flex: 1 1 0;
 }
 .vertical_center {
     margin: 0;
@@ -52,13 +56,17 @@
     position: relative;
     z-index: 999;
 }
+.item_right:last-child {
+    margin-right:0;
+}
 .item_right {
     margin-right: 20px;
     color:white;
     cursor: pointer;
-    border: 1px solid #00C9DE;
+    border: 1px solid var(--fg-color);
     padding: 5px 15px;
     border-radius: 5px;
+    font-size: 14px;
 }
 .middle {
     line-height: 64px;
@@ -86,11 +94,12 @@
     object-fit: cover;
 }
 .dd_content {
+    opacity: 0;
     display: none;
     position: absolute;
     width: max-content;
     right: 0;
-    background-color: #003C52;
+    background-color: var(--main-bg-color);
     padding: 5px 0;
     margin-top: 10px;   
     border: 1px solid #00818F;
@@ -98,7 +107,7 @@
     -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.65); 
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.65);
 }
-.dd_content::before {
+/* .dd_content::before {
     content: "";
     display: block;
     position: absolute;
@@ -121,7 +130,7 @@
     border-bottom: 14px solid #003C52;
     top: -13px;
     right: 11px;
-}
+} */
 .divider {
     width: 100%;
     height: 1px;
@@ -135,27 +144,28 @@
     padding: 5px 10px;
     word-break: break-all;
     cursor: pointer;
-    color: #fdfefe;
+    color: var(--fg-color);
 }
 .dd_item a {
-    color: #fdfefe;
+    color: var(--fg-color);
 }
 .dd_item:hover {
-    background-color: teal;
+    background-color: var(--accent-color);
 }
 .dd_info {
     display: none;
 }
 @media (max-width: 450px) {
     .dd_content {
-        width: 100%;
+        display: block;
+        width: 85%;
         position: fixed;
-        right: 0;
-        left: 0;
+        right: -85%;
         top: 0;
         bottom: 0;
         margin: 0;
         border: none;
+        transition: all 0.4s ease;
     }
     .dd_info {
         display: flex;
@@ -163,7 +173,6 @@
         padding: 30px 30px;
     }
     .dd_title {
-        color: #fdfefe;
         font-size: 1.2em;
         font-weight: bold;
     }

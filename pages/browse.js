@@ -6,11 +6,9 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { getAllDirectors, getAllGenres, getAllMovies } from '../lib/movies'
 import MovieSection from '../components/MovieSection'
+import Cover from '../components/Cover'
 
 export async function getServerSideProps(ctx) {
-  const movies = await getAllMovies();
-  const directors = await getAllDirectors();
-  const genres = await getAllGenres();
   const isAuthenticated = await getUserAuth(ctx)
   if(!isAuthenticated) {
     // Si el token no es correcto o no está autenticado, a la puta calle
@@ -21,7 +19,9 @@ export async function getServerSideProps(ctx) {
       },
     };
   }
-
+  const movies = await getAllMovies();
+  const directors = await getAllDirectors();
+  const genres = await getAllGenres();
   return {
     props: {
         initialMovies: movies,
@@ -50,7 +50,7 @@ export default function Home({ initialMovies,directors,genres, user }) {
     var query = ""
     switch(restriction) {
       case "directorId":
-        query = "director: "
+        query = "Dirigida por: "
         var director = ""
         for(var dir of directors) {
           if(dir.id == value) {
@@ -61,7 +61,7 @@ export default function Home({ initialMovies,directors,genres, user }) {
         query += director;
         break;
       case "genreId":
-        query="género: "
+        query="Resultados para el género: "
         for(var genre of genres) {
           if(genre.id == value) {
             query += genre.name.charAt(0).toUpperCase() + genre.name.substring(1)
@@ -81,16 +81,15 @@ export default function Home({ initialMovies,directors,genres, user }) {
       <Navigation username={user.name} avatar={user.avatar} />
       <main className="main">
         {/* AQUÍ SE IRÁ METIENDO DE FORMA MANUAL LAS RESTRICCIONES Y TAL Y CUAL*/}
-        
         {!restriction &&
         <>
+        <Cover title="En exclusiva" movie={initialMovies[0]} />
         <MovieSection header="Descubrir" movies={initialMovies} user={user} />
-        <div className="section-divider"></div>
         <MovieSection header="Lista de reproducción" movies={initialMovies} user={user} restriction="watchlist" restriction_value="1"/> 
         </>}
         {restriction && <>
           <MovieSection 
-            header={`Resultados de ${parseRestriction(query_restriction, query_restriction_value)}`} 
+            header={`${parseRestriction(query_restriction, query_restriction_value)}`} 
             movies={initialMovies} 
             user={user} 
             restriction={query_restriction} 

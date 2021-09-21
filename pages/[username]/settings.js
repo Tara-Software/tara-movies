@@ -18,7 +18,7 @@ export default function ControlPanel({user, params}) {
 
         body.append("username", username);
         body.append("email", user.email);
-        body.append("file", avatar);
+        body.append("id", user.id);
         
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/update`, {
@@ -27,6 +27,14 @@ export default function ControlPanel({user, params}) {
             });
             if(response.ok) {
                 const data = await response.json()
+                console.log(data)
+                // Subir avatar al otro servidor
+                const form = new FormData()
+                form.append('file', avatar, data.id + ".png");
+                fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/newavatar`, {
+                    method: 'POST', 
+                    body: form
+                });
 
                 router.push("/"+data.username+"/settings")
                 // Poner que todo es correcto
@@ -63,6 +71,7 @@ export default function ControlPanel({user, params}) {
         </Head>
         <Navigation username={user.name} avatar={user.avatar} />
         <div className="container padding">
+            
             <div className="info-account padding-10">
                 <div className="info-account-img">
                     <img src={user.avatar} />

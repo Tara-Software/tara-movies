@@ -12,7 +12,9 @@ export default async function handle(req, res) {
             accessToken: true,
             user: {
                 select: {
+                    id: true,
                     name: true,
+                    isAdmin: true,
                     email: true,
                     avatar: true,
                     watchlists: {
@@ -25,6 +27,7 @@ export default async function handle(req, res) {
         }
     })
     if(user.length > 0) {
+        const result = user[0]
         return res.status(200).json(user[0])
     } else {
         return res.status(400).json({"error": "Usuario no encontrado"})

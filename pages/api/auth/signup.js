@@ -55,6 +55,15 @@ export default async function handle(req, res) {
             headers: {
                 'Content-Type': 'application/json'
             }
+        })
+       
+        await prisma.user.update({
+            where: {
+                id: id
+            },
+            data: {
+                avatar: `${process.env.NEXT_PUBLIC_VIDEOS_URL}/avatar/${id}`
+            }
         });
         
         return res.status(200).json(result)
