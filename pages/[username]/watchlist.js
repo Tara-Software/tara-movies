@@ -8,7 +8,7 @@ export default function Watchlist({user, params}) {
         return movie;
     })
     const removeWatchList = async (e, id) => {
-        const removed = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/movie/removewatchlist`, {
+        const removed = await fetch(`${process.env.NETX_PUBLIC_VERCEL_URL}/api/movie/removewatchlist`, {
         method: 'POST',
         body: JSON.stringify({email: user.email, movie: id})
         })

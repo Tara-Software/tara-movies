@@ -11,7 +11,7 @@ export async function getServerSideProps(ctx) {
     const cookie = nookies.get(ctx)
     if(cookie.accessToken) {
         try {
-            const destroyed = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`, {
+            const destroyed = await fetch(`${process.env.NETX_PUBLIC_VERCEL_URL}/api/auth/logout`, {
             method: 'POST',
             body: JSON.stringify(cookie.accessToken)
             })

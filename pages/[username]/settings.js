@@ -21,7 +21,7 @@ export default function ControlPanel({user, params}) {
         body.append("id", user.id);
         
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/update`, {
+            const response = await fetch(`${process.env.NETX_PUBLIC_VERCEL_URL}/api/auth/update`, {
                 method: 'POST',
                 body
             });

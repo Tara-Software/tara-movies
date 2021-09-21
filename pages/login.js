@@ -37,7 +37,7 @@ export default function Login({username}) {
         let payload = {email: email, password: hashed_password}      
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
+            const response = await fetch(`${process.env.NETX_PUBLIC_VERCEL_URL}/api/auth/login`, {
                 method: 'POST',
                 body: JSON.stringify(payload)
             });
