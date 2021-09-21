@@ -20,7 +20,6 @@
     "crypto-js": "^4.1.1",
     "formidable": "^1.2.2",
     "http-proxy": "^1.18.1",
-    "landys": "^1.0.8",
     "mime": "^2.5.2",
     "multer": "^1.4.3",
     "multiparty": "^4.2.2",
@@ -38,7 +37,8 @@
     "react-player": "^2.9.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "sharp": "^0.29.1"
   },
   "devDependencies": {
     "eslint": "7.32.0",

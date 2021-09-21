@@ -1,7 +1,6 @@
 import prisma from '../../../lib/prisma';
-const landys = require('landys')
-
 // const prisma = new PrismaClient()
+
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return email != undefined && re.test(email);
