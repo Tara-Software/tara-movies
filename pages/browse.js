@@ -8,6 +8,10 @@ import MovieSection from '../components/MovieSection'
 import Cover from '../components/Cover'
 
 export async function getServerSideProps(ctx) {
+
+  console.log("hola")
+  console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
+  
   const isAuthenticated = await getUserAuth(ctx)
   if(!isAuthenticated) {
     // Si el token no es correcto o no está autenticado, a la puta calle
