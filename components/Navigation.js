@@ -8,7 +8,7 @@ export default function Navigation(props) {
     const settings_URL = (props.username ? "/" + props.username + "/settings" : "#")
     const index_URL = (props.username ? "/browse" : "/")
     const watchlist_URL = (props.username ? "/" + props.username + "/watchlist" : "#")
-    const image = (props.avatar ? props.avatar : "/images/default.png")
+    const image = (props.avatar ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/props.avatar` : "/images/default.png")
 
     useEffect(() => {
         // Close the dropdown menu if the user clicks outside of it
