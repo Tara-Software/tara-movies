@@ -74,7 +74,7 @@ export default function ControlPanel({user, params}) {
             
             <div className="info-account padding-10">
                 <div className="info-account-img">
-                    <img src={user.avatar} />
+                    <img src={process.env.NEXT_PUBLIC_VIDEOS_URL + user.avatar} />
                 </div>
                 <div className="info-account-text">
                     <span className="info-account-name">{user.name}</span>    
@@ -94,7 +94,7 @@ export default function ControlPanel({user, params}) {
                     <form onSubmit={handleUpdate}>
                     <div className="input-wrapper w400 avatar-input-wrapper">
                             <div className="avatar-input">
-                                <img className="avatar-input-img" src={createObjectURL ? createObjectURL : user.avatar} />
+                                <img className="avatar-input-img" src={createObjectURL ? createObjectURL : `${process.env.NEXT_PUBLIC_VIDEOS_URL}${user.avatar}`} />
                                 <label htmlFor="upload_avatar" className="tara-button avatar-input-button">Editar</label>
                                 <input className="avatar-input hide" type="file" id="upload_avatar" onChange={uploadToClient}/>
                             </div>
