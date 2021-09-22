@@ -84,7 +84,7 @@ export default function Navigation(props) {
                     <>
                     <div className={styles.dropdown}  onClick={toggleShowDropDown}>
                         <div className={styles.dd_cover}>
-                            <Image src={image} width="32px" height="32px" className="dd_image"/>
+                            <img src={image} width="32px" height="32px" className="dd_image"/>
                             <span className={styles.dd_cover_name + " arrow"}>{props.username || ""}</span>
                             </div>
                         <div className={styles.dd_content} id="dd">
