@@ -53,7 +53,7 @@ export default async function handle(req, res) {
         // Código para generar una imagen 
         var id = result.id
         console.log("eiei")
-        const response = await fetch(`/upavatar`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/upavatar`, {
             method: 'POST',
             body: JSON.stringify({id:id}),
             headers: {
