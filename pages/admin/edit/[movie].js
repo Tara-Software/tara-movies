@@ -146,7 +146,7 @@ export default function Edit(props) {
                 <div className="miniature-input">
                     <div className="miniature-input-wrapper">
                         <span style={{display: "block", marginBottom: "10px"}}>Añadir miniatura</span>
-                        <label htmlFor="upload_miniature" className="tara-button transparent"><img className="miniature-input-img" src={createObjectURL ? createObjectURL : "/images/default.jpg"} /></label>
+                        <label htmlFor="upload_miniature" className="tara-button transparent"><img className="miniature-input-img" src={createObjectURL ? createObjectURL : process.env.NEXT_PUBLIC_VIDEOS_URL +"/videos/thumb/default"} /></label>
                         <input className="miniature-input hide" type="file" id="upload_miniature" onChange={uploadToClient}/>
                     </div>
                 </div>

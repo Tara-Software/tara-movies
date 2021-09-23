@@ -47,7 +47,7 @@ export default async function handle(req, res) {
                             },
                         }
                     });
-                    var thumbnail = "/images/default.png"
+                    var thumbnail = "/videos/thumb/default"
                     if(files.thumbnail !== undefined) {
                         thumbnail = fields.id + files.thumbnail.name.split(".")[1]
                     }
