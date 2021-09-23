@@ -62,12 +62,11 @@ export default async function handle(req, res) {
                     thumbnail: `/moviethumbnail/${prisma_response.id}`
                 }
             })
-            await saveFile(files.thumbnail, thumbnail)
             resolve(prisma_response)
         } catch(error) {
             console.error(error)
-            return res.status(401).json({error: "Algo has hecho mal en la subida del video."})
             reject(error)
+            return res.status(401).json({error: "Algo has hecho mal en la subida del video."})
         }
         
         }); // parse
@@ -100,14 +99,4 @@ export const getGenres = async genres_list => {
                 );
     }
     return res;
-}
-export const saveFile = async (file, id) => {
-    if (file === undefined) {
-        return;
-    }
-    console.log(file.path)
-    const data = fs.readFileSync(file.path);
-    fs.writeFileSync(`./public/images/${id}`, data);
-    await fs.unlinkSync(file.path)
-    return;
 }
