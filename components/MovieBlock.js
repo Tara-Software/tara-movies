@@ -11,7 +11,7 @@ export default function MovieBlock({title, description, url, thumbnail, watchlis
 		<a className="movie-item">
 			<li style={{listStyle: "none"}}>
 				<div className="movie-item-thumbnail">
-						<img src={thumbnail ? thumbnail : "/images/default.png"}/>
+						<img src={thumbnail ? process.env.NEXT_PUBLIC_VIDEOS_URL + thumbnail : "/images/default.png"}/>
 				</div>
 				<div className="movie-item-info">
 					<span className="movie-item-title">{title}</span>

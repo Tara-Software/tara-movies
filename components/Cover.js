@@ -1,6 +1,7 @@
 import Link from 'next/link'
 export default function Cover(props) {
     const movie = props.movie;
+    
     return (
         <div className="cover-wrapper">
             <div className="cover-title">{props.title}</div>
@@ -13,7 +14,7 @@ export default function Cover(props) {
                             </div>
                         </div>
                     </Link>
-                    <img className="cover-img-background" src={movie.thumbnail}></img>
+                    <img className="cover-img-background" src={thumbnail ? process.env.NEXT_PUBLIC_VIDEOS_URL + movie.thumbnail : "/images/default.png"}></img>
                 </div>
             </Link>
             <div className="cover-data">
