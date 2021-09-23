@@ -72,7 +72,7 @@ export default function Movie({ user, movie, data}) {
                                 </div>
                             </div>
                     </Link>
-                    <div className="preview-image mask"><img src={data.thumbnail}/></div>
+                    <div className="preview-image mask"><img src={proces.env.NEXT_PUBLIC_VERCEL_URL + data.thumbnail}/></div>
                 </div>
                 <div className="preview-wrapper padding">
                     <div className="title-actions-wrapper">
