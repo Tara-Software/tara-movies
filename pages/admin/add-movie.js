@@ -31,6 +31,7 @@ export default function AdminPanel(props) {
             method: 'POST',
             body
         });
+        console.log("res status: " + res.status)
         if(res.status == 401) {
             var errorMsg = await res.json()
             var errsuc = document.getElementById("error-success");
@@ -43,7 +44,8 @@ export default function AdminPanel(props) {
             const { id } = await res.json();
             const video_form = new FormData();
             video_form.append("video", video, id + '.mp4');
-            try {    
+            console.log("Id: " + id);
+            try {
                 var response = await fetch(`/api/video_to_server`, {
                     body: video_form,
                     method: 'POST'

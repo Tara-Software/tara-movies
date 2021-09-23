@@ -18,6 +18,7 @@ export default async function handle(req, res) {
     await runMiddleWare(req, res, cors);
 
     if (req.method === 'POST') {
+        console.log("conseguimos llegar a video to server :)")
         var form = new multiparty.Form()
 
         form.on('part', function(formPart) {
