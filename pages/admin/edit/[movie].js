@@ -41,7 +41,7 @@ export default function Edit(props) {
                 fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/newmoviethumbnail`, {
                 method: 'POST',
                 body: form
-            })
+            });
             }            
             errsuc.classList.add("tara-success-show")
             errsuc.innerText = "Todo bien!!"

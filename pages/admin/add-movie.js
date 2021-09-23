@@ -22,7 +22,6 @@ export default function AdminPanel(props) {
 
         body.append("title", title);
         body.append("description", description);
-        body.append("thumbnail", thumbnail);
         body.append("director", director);
         body.append("genres", genres);
 
@@ -31,6 +30,14 @@ export default function AdminPanel(props) {
             method: 'POST',
             body
         });
+        if(thumbnail) {
+            const form = new FormData();
+            form.append("file", thumbnail, data.id + '.png');
+            fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/newmoviethumbnail`, {
+                method: 'POST',
+                body: form
+            });
+        }
         console.log("res status: " + res.status)
         if(res.status == 401) {
             var errorMsg = await res.json()
