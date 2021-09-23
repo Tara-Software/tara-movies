@@ -47,10 +47,12 @@ export default function AdminPanel(props) {
             console.log("Id: " + id);
             try {
                 var response = await fetch(`/api/video_to_server`, {
-                    body: video_form,
-                    method: 'POST'
+                    method: 'POST',
+                    body: video_form
+                    
                 });
-                console.log(response.status)
+                console.log("response status:")
+                console.log(response.status);
                 if(response.status == 200) {
                     var errsuc = document.getElementById("error-success");
                     errsuc.classList.add("tara-success-show")
