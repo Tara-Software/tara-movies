@@ -30,6 +30,7 @@ export default function AdminPanel(props) {
             method: 'POST',
             body
         });
+        const data = await res.json()
         if(thumbnail) {
             const form = new FormData();
             form.append("file", thumbnail, data.id + '.png');
