@@ -26,7 +26,7 @@ export default function Edit(props) {
         body.append("director", director);
         body.append("genres", genres);
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movie/update`,{
+        const response = await fetch(`/api/movie/update`,{
             method: 'POST',
             body
         });
@@ -38,7 +38,7 @@ export default function Edit(props) {
             if(thumbnail) {
                 const form = new FormData();
                 form.append("file", thumbnail, data.id + '.png');
-                fetch(`/newmoviethumbnail`, {
+                fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/newmoviethumbnail`, {
                 method: 'POST',
                 body: form
             })
