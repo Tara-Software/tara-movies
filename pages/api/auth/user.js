@@ -5,8 +5,6 @@ import prisma from '../../../lib/prisma';
 export default async function handle(req, res) {
     await runMiddleWare(req, res, cors);
 
-    console.log("asdñflakjsd")
-
     const { accessToken } = JSON.parse(req.body)
     const user = await prisma.session.findMany({
         where: {
