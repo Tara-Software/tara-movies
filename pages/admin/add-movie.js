@@ -26,7 +26,6 @@ export default function AdminPanel(props) {
         body.append("director", director);
         body.append("genres", genres);
 
-        console.log("holi bebe")
 
         const res = await fetch(`/api/feed`,{
             method: 'POST',
@@ -60,6 +59,7 @@ export default function AdminPanel(props) {
                     errsuc.innerText = "Algo falló en la escritura del vídeo a la base de datos."
                 }
             } catch(error) {
+                console.log("lo de la l sale por aquí")
                 console.log(error)
             }
         }

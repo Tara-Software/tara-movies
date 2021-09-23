@@ -17,7 +17,6 @@ export const config = {
 export default async function handle(req, res) {
     await runMiddleWare(req, res, cors);
 
-
     if (req.method === 'POST') {
         var form = new multiparty.Form()
 
@@ -34,6 +33,7 @@ export default async function handle(req, res) {
                     }
                 }
             };
+            console.log("Estoy pidiendo que suba mi video")
             request.post({
                 url: `${process.env.NEXT_PUBLIC_VIDEOS_URL}/upload`,
                 formData: formData,
