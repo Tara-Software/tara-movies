@@ -9,7 +9,7 @@ export default function Edit(props) {
     const [title, setTitle] = useState(props.movie.title)
     const [description, setDescription] = useState(props.movie.description)
     const [thumbnail, setThumbnail] = useState(props.movie.thumbnail)
-    const [createObjectURL, setCreateObjectURL] = useState(props.movie.thumbnail);
+    const [createObjectURL, setCreateObjectURL] = useState(process.env.NEXT_PUBLIC_VIDEOS_URL + props.movie.thumbnail);
     const [ createObjectVideoURL, setCreateObjectVideoURL ] = useState(null);
     const [ video, setVideo ] = useState(null);
     const [ director, setDirector ] = useState(props.movie.director.name);
