@@ -46,7 +46,7 @@ export default function AdminPanel(props) {
             video_form.append("video", video, id + '.mp4');
             console.log("Id: " + id);
             try {
-                var response = await fetch(`/api/video_to_server`, {
+                var response = await fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/upload`, {
                     method: 'POST',
                     body: video_form
                     
