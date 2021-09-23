@@ -30,15 +30,6 @@ export default function AdminPanel(props) {
             method: 'POST',
             body
         });
-        const data = await res.json()
-        if(thumbnail) {
-            const form = new FormData();
-            form.append("file", thumbnail, data.id + '.png');
-            fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/newmoviethumbnail`, {
-                method: 'POST',
-                body: form
-            });
-        }
         console.log("res status: " + res.status)
         if(res.status == 401) {
             var errorMsg = await res.json()
@@ -54,6 +45,14 @@ export default function AdminPanel(props) {
             video_form.append("video", video, id + '.mp4');
             console.log("Id: " + id);
             try {
+                if(thumbnail) {
+                    const form = new FormData();
+                    form.append("file", thumbnail, id + '.png');
+                    fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/newmoviethumbnail`, {
+                        method: 'POST',
+                        body: form
+                    });
+                }
                 var response = await fetch(`${process.env.NEXT_PUBLIC_VIDEOS_URL}/upload`, {
                     method: 'POST',
                     body: video_form
@@ -172,7 +171,7 @@ export default function AdminPanel(props) {
                 <div className="miniature-input">
                     <div className="miniature-input-wrapper">
                         <span style={{display: "block", marginBottom: "10px"}}>Añadir miniatura</span>
-                        <label htmlFor="upload_miniature" className="tara-button transparent"><img className="miniature-input-img" src={createObjectURL ? createObjectURL : process.env.NEXT_PUBLIC_VIDEOS_URL +"/videos/thumb/default"} /></label>
+                        <label htmlFor="upload_miniature" className="tara-button transparent"><img className="miniature-input-img" src={createObjectURL ? createObjectURL : "/videos/thumb/default"} /></label>
                         <input className="miniature-input hide" type="file" id="upload_miniature" onChange={uploadToClient}/>
                     </div>
                 </div>
