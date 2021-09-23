@@ -23,7 +23,7 @@ export default async function handle(req, res) {
 
         form.on('part', function(formPart) {
             var contentType = formPart.headers['content-type'];
-
+            console.log("part????")
             var formData = {
                 file: {
                     value: formPart,
