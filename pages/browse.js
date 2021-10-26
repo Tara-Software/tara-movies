@@ -89,8 +89,8 @@ export default function Home({ initialMovies,directors,genres, user }) {
         <Cover title="En exclusiva" movie={initialMovies[0]} />
         <MovieSection header="Descubrir" movies={initialMovies} user={user} />
         <MovieSection header="Lista de reproducción" movies={initialMovies} user={user} restriction="watchlist" restriction_value="1"/> 
-        <MovieSection header="Spooky" movies={initialMovies} user={user} restriction="spooky" restriction_value="1"/> 
-        <MovieSection header="Fantasía" movies={initialMovies} user={user} restriction="fantasía" restriction_value="1"/> 
+        <MovieSection header="Spooky" movies={initialMovies} user={user} restriction="genreId" restriction_value="Spooky"/> 
+        <MovieSection header="Fantasía" movies={initialMovies} user={user} restriction="genreId" restriction_value="Fantasía"/> 
         </>}
         {restriction && <>
           <MovieSection 
