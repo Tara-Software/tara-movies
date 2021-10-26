@@ -27,7 +27,7 @@ export default function AdminPanel(props) {
                         <li key={index} id={`item_${movie.id}`} style={{border: "1px solid var(--fg-color)", position:"relative", display: "flex", alignItems: "center", margin: "10px 0", borderRadius:"5px"}}>
                             <div style={{display: "inline-block"}}><img className="movie-thumbnail" src={process.env.NEXT_PUBLIC_VIDEOS_URL + movie.thumbnail}></img></div>
                             <Link href={`/admin/edit/${movie.id}`}><a><span style={{marginLeft: "10px", boxDecorationBreak: "clone"}}>{movie.title}</span></a></Link>
-                            <span onClick={() => deleteMovie(movie.id)} style={{cursor: "pointer",position:"relative", right:"1em"}}>Borrar</span>
+                            <span onClick={() => deleteMovie(movie.id)} style={{cursor: "pointer",position:"absolute", right:"1em"}}>Borrar</span>
                         </li>
                     </>
                 })}
